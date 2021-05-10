@@ -51,7 +51,7 @@ def query():
     for employee in employees:
         print_employees += str(employee) + "/n"
     query_label = Label(root, text=print_employees)
-    query_label.grid(row=4, column=0, columnspan=2)
+    query_label.grid(row=14, column=0, columnspan=2)
     conn.commit()
     conn.close()
 
@@ -106,10 +106,10 @@ DepartmentID_label = Label(root, text="Department ID")
 DepartmentID_label.grid(row=11, column=0)
 
 enter_btn = Button(root, text="Add Employee To Database", command=enter)
-enter_btn.grid(row=2, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+enter_btn.grid(row=12, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 query_btn = Button(root, text="Show Employees", commmand=query)
-query_btn.grid(row=3, column=0, columnspan=2, pady=10, padx=10, ipadx=137)
+query_btn.grid(row=13, column=0, columnspan=2, pady=10, padx=10, ipadx=137)
 
 conn.commit()
 conn.close()

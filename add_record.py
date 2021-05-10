@@ -41,7 +41,7 @@ def query():
     for record in records:
         print_records += str(record) + "/n"
     query_label = Label(root, text=print_records)
-    query_label.grid(row=4, column=0, columnspan=2)
+    query_label.grid(row=9, column=0, columnspan=2)
     conn.commit()
     conn.close()
 
@@ -76,10 +76,10 @@ Time_Out_Minute_label = Label(root, text="Time Out Minute")
 Time_Out_Minute_label.grid(row=6, column=0)
 
 enter_btn = Button(root, text="Add Record To Database", command=enter)
-enter_btn.grid(row=2, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+enter_btn.grid(row=7, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 query_btn = Button(root, text="Show Records", commmand=query)
-query_btn.grid(row=3, column=0, columnspan=2, pady=10, padx=10, ipadx=137)
+query_btn.grid(row=8, column=0, columnspan=2, pady=10, padx=10, ipadx=137)
 
 conn.commit()
 conn.close()
