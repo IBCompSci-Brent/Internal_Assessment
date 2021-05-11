@@ -49,7 +49,7 @@ def query():
     print(employees)
     print_employees = ''
     for employee in employees:
-        print_employees += str(employee) + "/n"
+        print_employees += str(employee) + "\n"
     query_label = Label(root, text=print_employees)
     query_label.grid(row=14, column=0, columnspan=2)
     conn.commit()

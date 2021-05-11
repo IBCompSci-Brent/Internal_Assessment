@@ -29,7 +29,7 @@ def query():
     print(departments)
     print_departments = ''
     for department in departments:
-        print_departments += str(department) + "/n"
+        print_departments += str(department) + "\n"
     query_label = Label(root, text=print_departments)
     query_label.grid(row=4, column=0, columnspan=2)
     conn.commit()
