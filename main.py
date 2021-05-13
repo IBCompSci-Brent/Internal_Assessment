@@ -43,7 +43,7 @@ Passcode_label.grid(row=1, column=0)
 
 # Code for home
 add_department_frame_btn = tk.Button(home, text="Add Department", command=lambda: show_frame(add_department))
-add_department_frame_btn.grid(row=1, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+add_department_frame_btn.grid(row=2, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 
 
@@ -73,6 +73,9 @@ Name_label.grid(row=1, column=0)
 
 add_department_btn = tk.Button(add_department, text="Add Department To Database", command=enter)
 add_department_btn.grid(row=2, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
+back_to_home_from_add_department_btn = tk.Button(add_department, text="Back to Home", command=lambda: show_frame(home))
+back_to_home_from_add_department_btn.grid(row=3, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 # Code for add_employee
 def enter():
@@ -161,9 +164,8 @@ DepartmentID_label.grid(row=11, column=0)
 add_employee_btn = tk.Button(add_employee, text="Add Employee To Database", command=enter)
 add_employee_btn.grid(row=12, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
-
-
-
+back_to_home_from_add_employee_btn = tk.Button(add_employee, text="Back to Home", command=lambda: show_frame(home))
+back_to_home_from_add_employee_btn.grid(row=13, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 show_frame(first)
 root.mainloop()
