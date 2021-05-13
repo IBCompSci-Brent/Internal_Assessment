@@ -30,6 +30,17 @@ def show_frame(frame_to_raise):
     frame_to_raise.tkraise()
 
 # Code for first
+Username = tk.Entry(first, width=30)
+Username.grid(row=0, column=1, padx=20)
+Passcode = tk.Entry(first, width=30)
+Passcode.grid(row=1, column=1)
+
+Username_label = tk.Label(first, text="Username", font=LARGE_FONT)
+Username_label.grid(row=0, column=0)
+Passcode_label = tk.Label(first, text="Passcode", font=LARGE_FONT)
+Passcode_label.grid(row=1, column=0)
+
+
 
 # Code for add_department
 def enter():
@@ -45,23 +56,18 @@ def enter():
     DepartmentID.delete(0, END)
     Name.delete(0, END)
 
-DepartmentID = Entry(root, width=30)
+DepartmentID = tk.Entry(add_department, width=30)
 DepartmentID.grid(row=0, column=1, padx=20)
-Name = Entry(root, width=30)
+Name = tk.Entry(add_department, width=30)
 Name.grid(row=1, column=1)
 
-DepartmentID_label = Label(root, text="Department ID")
+DepartmentID_label = tk.Label(add_department, text="Department ID", font=LARGE_FONT)
 DepartmentID_label.grid(row=0, column=0)
-Name_label = Label(root, text="Name")
+Name_label = tk.Label(root, text="Name", font=LARGE_FONT)
 Name_label.grid(row=1, column=0)
 
-enter_btn = Button(root, text="Add Department To Database", command=enter)
-enter_btn.grid(row=2, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
-
-
-
-
-
+add_department_btn = tk.Button(add_department, text="Add Department To Database", command=enter)
+add_department_btn.grid(row=2, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 conn.commit()
 conn.close()
