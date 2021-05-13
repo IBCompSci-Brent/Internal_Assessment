@@ -18,6 +18,7 @@ container.grid_rowconfigure(0, weight=1)
 container.grid_columnconfigure(0, weight=1)
 
 first = tk.Frame(container)
+home = tk.Frame(container)
 add_department = tk.Frame(container)
 add_employee = tk.Frame(container)
 add_record = tk.Frame(container)
@@ -39,6 +40,10 @@ Username_label = tk.Label(first, text="Username", font=LARGE_FONT)
 Username_label.grid(row=0, column=0)
 Passcode_label = tk.Label(first, text="Passcode", font=LARGE_FONT)
 Passcode_label.grid(row=1, column=0)
+
+# Code for home
+add_department_frame_btn = tk.Button(home, text="Add Department", command=lambda: show_frame(add_department))
+add_department_frame_btn.grid(row=1, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 
 
@@ -69,8 +74,10 @@ Name_label.grid(row=1, column=0)
 add_department_btn = tk.Button(add_department, text="Add Department To Database", command=enter)
 add_department_btn.grid(row=2, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
-conn.commit()
-conn.close()
+# Code for add_employee
+
+
+
 show_frame(first)
 root.mainloop()
 
