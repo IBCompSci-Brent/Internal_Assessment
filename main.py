@@ -48,6 +48,9 @@ add_department_frame_btn.grid(row=1, column=0, columnspan=2, pady=10, padx=10, i
 add_employee_frame_btn = tk.Button(home, text="Add Employee", command=lambda: show_frame(add_employee))
 add_employee_frame_btn.grid(row=2, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
+add_record_frame_btn = tk.Button(home, text="Add Record", command=lambda: show_frame(add_record))
+add_record_frame_btn.grid(row=3, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
 # Code for add_department
 def enter():
     conn = sqlite3.connect('company.db')
@@ -168,6 +171,65 @@ add_employee_btn.grid(row=12, column=0, columnspan=2, pady=10, padx=10, ipadx=10
 back_to_home_from_add_employee_btn = tk.Button(add_employee, text="Back to Home", command=lambda: show_frame(home))
 back_to_home_from_add_employee_btn.grid(row=13, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
+# Code for add_record
+def enter():
+    conn = sqlite3.connect('company.db')
+    c = conn.cursor()
+    c.execute("INSERT INTO records VALUES (:ID, :Name, :Record_Date, :Time_In_Hour, :Time_In_Minute, :Time_Out_Hour, :Time_Out_Minute)",
+            {
+                'ID': ID.get(),
+                'Name': Name.get(),
+                'Record_Date': Record_Date.get(),
+                'Time_In_Hour': Time_In_Hour.get(),
+                'Time_In_Minute': Time_In_Minute.get(),
+                'Time_Out_Hour': Time_Out_Hour.get(),
+                'Time_Out_Minute': Time_Out_Minute.get()
+            })
+    conn.commit()
+    conn.close()
+    ID.delete(0, END)
+    Name.delete(0, END)
+    Record_Date.delete(0, END)
+    Time_In_Hour.delete(0, END)
+    Time_In_Minute.delete(0, END)
+    Time_Out_Hour.delete(0, END)
+    Time_Out_Minute.delete(0, END)
+
+ID = tk.Entry(add_record, width=30)
+ID.grid(row=0, column=1, padx=20)
+Name = tk.Entry(add_record, width=30)
+Name.grid(row=1, column=1)
+Record_Date = tk.Entry(add_record, width=30)
+Record_Date.grid(row=2, column=1)
+Time_In_Hour = tk.Entry(add_record, width=30)
+Time_In_Hour.grid(row=3, column=1)
+Time_In_Minute = tk.Entry(add_record, width=30)
+Time_In_Minute.grid(row=4, column=1)
+Time_Out_Hour = tk.Entry(add_record, width=30)
+Time_Out_Hour.grid(row=5, column=1)
+Time_Out_Minute = tk.Entry(add_record, width=30)
+Time_In_Minute.grid(row=6, column=1)
+
+ID_label = tk.Label(add_record, text="ID", font=LARGE_FONT)
+ID_label.grid(row=0, column=0)
+Name_label = tk.Label(add_record, text="Name", font=LARGE_FONT)
+Name_label.grid(row=1, column=0)
+Record_Date_label = tk.Label(add_record, text="Record Date", font=LARGE_FONT)
+Record_Date_label.grid(row=2, column=0)
+Time_In_Hour_label = tk.Label(add_record, text="Time In Hour", font=LARGE_FONT)
+Time_In_Hour_label.grid(row=3, column=0)
+Time_In_Minute_label = tk.Label(add_record, text="Time In Minute", font=LARGE_FONT)
+Time_In_Minute_label.grid(row=4, column=0)
+Time_Out_Hour_label = tk.Label(add_record, text="Time Out Hour", font=LARGE_FONT)
+Time_Out_Hour_label.grid(row=5, column=0)
+Time_Out_Minute_label = tk.Label(add_record, text="Time Out Minute", font=LARGE_FONT)
+Time_Out_Minute_label.grid(row=6, column=0)
+
+add_record_btn = tk.Button(add_record, text="Add Record To Database", command=enter)
+add_record_btn.grid(row=7, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
+back_to_home_from_add_record_btn = tk.Button(add_record, text="Back to Home", command=lambda: show_frame(home))
+back_to_home_from_add_record_btn.grid(row=8, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
 show_frame(first)
 root.mainloop()
-
