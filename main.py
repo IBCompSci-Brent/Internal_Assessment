@@ -43,9 +43,10 @@ Passcode_label.grid(row=1, column=0)
 
 # Code for home
 add_department_frame_btn = tk.Button(home, text="Add Department", command=lambda: show_frame(add_department))
-add_department_frame_btn.grid(row=2, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+add_department_frame_btn.grid(row=1, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
-
+add_employee_frame_btn = tk.Button(home, text="Add Employee", command=lambda: show_frame(add_employee))
+add_employee_frame_btn.grid(row=2, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 # Code for add_department
 def enter():
