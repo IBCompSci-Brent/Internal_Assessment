@@ -54,6 +54,9 @@ add_employee_frame_btn.grid(row=2, column=0, columnspan=2, pady=10, padx=10, ipa
 add_record_frame_btn = tk.Button(home, text="Add Record", command=lambda: show_frame(add_record))
 add_record_frame_btn.grid(row=3, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
+cancel_btn = tk.Button(home, text="Cancel", command=lambda: show_frame(first))
+cancel_btn.grid(row=4, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
 # Code for add_department
 def enter():
     conn = sqlite3.connect('company.db')
@@ -81,8 +84,8 @@ Name_label.grid(row=1, column=0)
 add_department_btn = tk.Button(add_department, text="Add Department To Database", command=enter)
 add_department_btn.grid(row=2, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
-back_to_home_from_add_department_btn = tk.Button(add_department, text="Back to Home", command=lambda: show_frame(home))
-back_to_home_from_add_department_btn.grid(row=3, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+cancel_from_add_department_btn = tk.Button(add_department, text="Cancel", command=lambda: show_frame(home))
+cancel_from_add_department_btn.grid(row=3, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 # Code for add_employee
 def enter():
@@ -171,8 +174,8 @@ DepartmentID_label.grid(row=11, column=0)
 add_employee_btn = tk.Button(add_employee, text="Add Employee To Database", command=enter)
 add_employee_btn.grid(row=12, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
-back_to_home_from_add_employee_btn = tk.Button(add_employee, text="Back to Home", command=lambda: show_frame(home))
-back_to_home_from_add_employee_btn.grid(row=13, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+cancel_from_add_employee_btn = tk.Button(add_employee, text="Cancel", command=lambda: show_frame(home))
+cancel_from_add_employee_btn.grid(row=13, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 # Code for add_record
 def enter():
@@ -231,8 +234,8 @@ Time_Out_Minute_label.grid(row=6, column=0)
 add_record_btn = tk.Button(add_record, text="Add Record To Database", command=enter)
 add_record_btn.grid(row=7, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
-back_to_home_from_add_record_btn = tk.Button(add_record, text="Back to Home", command=lambda: show_frame(home))
-back_to_home_from_add_record_btn.grid(row=8, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+cancel_from_add_record_btn = tk.Button(add_record, text="Cancel", command=lambda: show_frame(home))
+cancel_from_add_record_btn.grid(row=8, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 show_frame(first)
 root.mainloop()
