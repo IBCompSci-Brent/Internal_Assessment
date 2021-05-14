@@ -23,7 +23,7 @@ add_department = tk.Frame(container)
 add_employee = tk.Frame(container)
 add_record = tk.Frame(container)
 
-for F in (first, add_department, add_employee, add_record):
+for F in (first, home, add_department, add_employee, add_record):
     F.grid(row=0, column=0, sticky="nsew")
 
 
@@ -40,6 +40,9 @@ Username_label = tk.Label(first, text="Username", font=LARGE_FONT)
 Username_label.grid(row=0, column=0)
 Passcode_label = tk.Label(first, text="Passcode", font=LARGE_FONT)
 Passcode_label.grid(row=1, column=0)
+
+home_btn = tk.Button(first, text="Enter", command=lambda: show_frame(home))
+home_btn.grid(row=2, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 # Code for home
 add_department_frame_btn = tk.Button(home, text="Add Department", command=lambda: show_frame(add_department))
