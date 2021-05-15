@@ -40,8 +40,11 @@ def cancel_command():
 def enter_command():
     if Username.get() == "Brent" and Passcode.get() == "1234":
         show_frame(home)
+        Passcode.delete(0, END)
     else:
         mb.showerror("Error", "Incorrect Username or Passcode")
+        Username.delete(0, END)
+        Passcode.delete(0, END)
 
 Username = tk.Entry(first, width=30)
 Username.grid(row=0, column=1, padx=20)
