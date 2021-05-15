@@ -214,7 +214,7 @@ Time_In_Minute.grid(row=4, column=1)
 Time_Out_Hour = tk.Entry(add_record, width=30)
 Time_Out_Hour.grid(row=5, column=1)
 Time_Out_Minute = tk.Entry(add_record, width=30)
-Time_In_Minute.grid(row=6, column=1)
+Time_Out_Minute.grid(row=6, column=1)
 
 ID_label = tk.Label(add_record, text="ID", font=LARGE_FONT)
 ID_label.grid(row=0, column=0)
