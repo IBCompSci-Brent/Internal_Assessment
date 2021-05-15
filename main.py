@@ -2,6 +2,7 @@ import sqlite3
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+import sys
 from tkinter import messagebox as mb
 
 LARGE_FONT = ("Verdana", 12)
@@ -32,9 +33,19 @@ def show_frame(frame_to_raise):
     frame_to_raise.tkraise()
 
 # Code for first
+def cancel_command():
+    root.destroy()
+    sys.exit()
+
+def enter_command():
+    if Username.get() == "Brent" and Passcode.get() == "1234":
+        show_frame(home)
+    else:
+        mb.showerror("Error", "Incorrect Username or Passcode")
+
 Username = tk.Entry(first, width=30)
 Username.grid(row=0, column=1, padx=20)
-Passcode = tk.Entry(first, width=30)
+Passcode = tk.Entry(first, width=30, show="*")
 Passcode.grid(row=1, column=1)
 
 Username_label = tk.Label(first, text="Username", font=LARGE_FONT)
@@ -42,8 +53,11 @@ Username_label.grid(row=0, column=0)
 Passcode_label = tk.Label(first, text="Passcode", font=LARGE_FONT)
 Passcode_label.grid(row=1, column=0)
 
-home_btn = tk.Button(first, text="Enter", command=lambda: show_frame(home))
+home_btn = tk.Button(first, text="Enter", command=lambda: enter_command())
 home_btn.grid(row=2, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
+cancel_from_first_btn = tk.Button(first, text="Cancel", command=lambda: cancel_command())
+cancel_from_first_btn.grid(row=3, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 # Code for home
 database_btn = tk.Button(home, text="Database", command=lambda: show_frame(database))
@@ -58,8 +72,8 @@ add_employee_frame_btn.grid(row=2, column=0, columnspan=2, pady=10, padx=10, ipa
 add_record_frame_btn = tk.Button(home, text="Add Record", command=lambda: show_frame(add_record))
 add_record_frame_btn.grid(row=3, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
-cancel_btn = tk.Button(home, text="Cancel", command=lambda: show_frame(first))
-cancel_btn.grid(row=4, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+cancel_from_home_btn = tk.Button(home, text="Cancel", command=lambda: show_frame(first))
+cancel_from_home_btn.grid(row=4, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 # Code for database
 tree = ttk.Treeview(database)
