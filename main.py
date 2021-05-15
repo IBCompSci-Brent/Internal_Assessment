@@ -1,6 +1,7 @@
 import sqlite3
 import tkinter as tk
 from tkinter import *
+from tkinter import ttk
 from tkinter import messagebox as mb
 
 LARGE_FONT = ("Verdana", 12)
@@ -19,13 +20,13 @@ container.grid_columnconfigure(0, weight=1)
 
 first = tk.Frame(container)
 home = tk.Frame(container)
+database = tk.Frame(container)
 add_department = tk.Frame(container)
 add_employee = tk.Frame(container)
 add_record = tk.Frame(container)
 
-for F in (first, home, add_department, add_employee, add_record):
+for F in (first, home, database, add_department, add_employee, add_record):
     F.grid(row=0, column=0, sticky="nsew")
-
 
 def show_frame(frame_to_raise):
     frame_to_raise.tkraise()
@@ -45,6 +46,9 @@ home_btn = tk.Button(first, text="Enter", command=lambda: show_frame(home))
 home_btn.grid(row=2, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 # Code for home
+database_btn = tk.Button(home, text="Database", command=lambda: show_frame(database))
+database_btn.grid(row=0, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
 add_department_frame_btn = tk.Button(home, text="Add Department", command=lambda: show_frame(add_department))
 add_department_frame_btn.grid(row=1, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
@@ -56,6 +60,28 @@ add_record_frame_btn.grid(row=3, column=0, columnspan=2, pady=10, padx=10, ipadx
 
 cancel_btn = tk.Button(home, text="Cancel", command=lambda: show_frame(first))
 cancel_btn.grid(row=4, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
+# Code for database
+tree = ttk.Treeview(database)
+tree['columns'] = ("DepartmentID", "Name")
+
+tree.column("#0", width=0, stretch=NO)
+tree.column("DepartmentID", anchor=CENTER, width=120)
+tree.column("Name", anchor=W, width=80)
+
+tree.heading("#0", text="", anchor=W)
+tree.heading("DepartmentID", text="Department ID", anchor=CENTER)
+tree.heading("Name", text="Name", anchor=W)
+
+tree.insert(parent='', index='end', iid=0, text="", values=("1", "Finance"))
+tree.insert(parent='', index='end', iid=1, text="", values=("2", "Human Resources"))
+tree.insert(parent='', index='end', iid=2, text="", values=("3", "Sales"))
+tree.insert(parent='', index='end', iid=3, text="", values=("4", "Research"))
+
+tree.grid(row=0, column=0, pady=10, padx=10, ipadx=138)
+
+cancel_from_database_btn = tk.Button(database, text="Cancel", command=lambda: show_frame(home))
+cancel_from_database_btn.grid(row=1, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 # Code for add_department
 def enter():
@@ -81,7 +107,7 @@ DepartmentID_label.grid(row=0, column=0)
 Name_label = tk.Label(add_department, text="Name", font=LARGE_FONT)
 Name_label.grid(row=1, column=0)
 
-add_department_btn = tk.Button(add_department, text="Add Department To Database", command=enter)
+add_department_btn = tk.Button(add_department, text="Add Department", command=enter)
 add_department_btn.grid(row=2, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 cancel_from_add_department_btn = tk.Button(add_department, text="Cancel", command=lambda: show_frame(home))
@@ -171,7 +197,7 @@ Year_Joined_label.grid(row=10, column=0)
 DepartmentID_label = tk.Label(add_employee, text="Department ID", font=LARGE_FONT)
 DepartmentID_label.grid(row=11, column=0)
 
-add_employee_btn = tk.Button(add_employee, text="Add Employee To Database", command=enter)
+add_employee_btn = tk.Button(add_employee, text="Add Employee", command=enter)
 add_employee_btn.grid(row=12, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 cancel_from_add_employee_btn = tk.Button(add_employee, text="Cancel", command=lambda: show_frame(home))
@@ -231,7 +257,7 @@ Time_Out_Hour_label.grid(row=5, column=0)
 Time_Out_Minute_label = tk.Label(add_record, text="Time Out Minute", font=LARGE_FONT)
 Time_Out_Minute_label.grid(row=6, column=0)
 
-add_record_btn = tk.Button(add_record, text="Add Record To Database", command=enter)
+add_record_btn = tk.Button(add_record, text="Add Record", command=enter)
 add_record_btn.grid(row=7, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 cancel_from_add_record_btn = tk.Button(add_record, text="Cancel", command=lambda: show_frame(home))
