@@ -48,7 +48,7 @@ def enter_command():
 
 Username = tk.Entry(first, width=30)
 Username.grid(row=0, column=1, padx=20)
-Passcode = tk.Entry(first, width=30, show="*")
+Passcode = tk.Entry(first, width=30, show="•")
 Passcode.grid(row=1, column=1)
 
 Username_label = tk.Label(first, text="Username", font=LARGE_FONT)
