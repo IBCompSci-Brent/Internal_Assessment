@@ -128,39 +128,48 @@ def select_department(e):
     tree_department_DepartmentID.insert(0, values[0])
     tree_department_Name.insert(0, values[1])
 
+def update_department():
+    selected = tree.focus()
+    tree.item(selected, text="", values=(tree_department_DepartmentID.get(), tree_department_Name.get()))
+    tree_department_DepartmentID.delete(0, END)
+    tree_department_Name.delete(0, END)
+
 def delete_department():
     a = tree.selection()[0]
     tree.delete(a)
 
-cancel_from_database_btn = tk.Button(database, text="Cancel", command=lambda: show_frame(home))
-cancel_from_database_btn.grid(row=1, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
-
 tree_department_frame = Frame(database)
-tree_department_frame.grid(row=2, column=0)
+tree_department_frame.grid(row=1, column=0)
 
 tree_department_DepartmentID_label = tk.Label(tree_department_frame, text="Department ID")
-tree_department_DepartmentID_label.grid(row=3, column=0)
+tree_department_DepartmentID_label.grid(row=2, column=0)
 
 tree_department_Name_label = tk.Label(tree_department_frame, text="Name")
-tree_department_Name_label.grid(row=3, column=1)
+tree_department_Name_label.grid(row=2, column=1)
 
 tree_department_DepartmentID = tk.Entry(tree_department_frame)
-tree_department_DepartmentID.grid(row=4, column=0)
+tree_department_DepartmentID.grid(row=3, column=0)
 
 tree_department_Name = tk.Entry(tree_department_frame)
-tree_department_Name.grid(row=4, column=1)
-
-delete_department_btn = tk.Button(database, text="Delete Department", command=delete_department)
-delete_department_btn.grid(row=5, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+tree_department_Name.grid(row=3, column=1)
 
 clear_department_entries_btn = tk.Button(database, text="Clear Entries", command=clear_department_entries)
-clear_department_entries_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+clear_department_entries_btn.grid(row=4, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
+update_department_btn = tk.Button(database, text="Update Department", command=update_department)
+update_department_btn.grid(row=5, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
+delete_department_btn = tk.Button(database, text="Delete Department", command=delete_department)
+delete_department_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 department_up_btn = tk.Button(database, text="Move Up", command=up)
 department_up_btn.grid(row=7, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 department_down_btn = tk.Button(database, text="Move Down", command=down)
 department_down_btn.grid(row=8, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
+cancel_from_database_btn = tk.Button(database, text="Cancel", command=lambda: show_frame(home))
+cancel_from_database_btn.grid(row=9, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 tree.bind("<ButtonRelease-1>", select_department)
 
