@@ -8,7 +8,7 @@ from tkinter import messagebox as mb
 LARGE_FONT = ("Verdana", 12)
 root = tk.Tk()
 root.title('Company Database')
-root.geometry('500x500')
+root.geometry('500x600')
 container = tk.Frame(root)
 
 conn = sqlite3.connect('company.db')
@@ -90,15 +90,44 @@ tree.heading("#0", text="", anchor=W)
 tree.heading("DepartmentID", text="Department ID", anchor=CENTER)
 tree.heading("Name", text="Name", anchor=W)
 
-tree.insert(parent='', index='end', iid=0, text="", values=("1", "Finance"))
-tree.insert(parent='', index='end', iid=1, text="", values=("2", "Human Resources"))
-tree.insert(parent='', index='end', iid=2, text="", values=("3", "Sales"))
-tree.insert(parent='', index='end', iid=3, text="", values=("4", "Research"))
+data = [
+    ["1", "Finance"],
+    ["2", "Human Resources"],
+    ["3", "Sales"],
+    ["4", "Research"]
+]
+
+count = 0
+for department in data:
+    tree.insert(parent='', index='end', iid=count, text="", values=(department[0], department[1]))
+    count += 1
 
 tree.grid(row=0, column=0, pady=10, padx=10, ipadx=138)
 
+def delete_one_department():
+    a = tree.selection()[0]
+    tree.delete(a)
+
 cancel_from_database_btn = tk.Button(database, text="Cancel", command=lambda: show_frame(home))
 cancel_from_database_btn.grid(row=1, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
+tree_department_frame = Frame(database)
+tree_department_frame.grid(row=2, column=0)
+
+tree_department_DepartmentID_label = tk.Label(tree_department_frame, text="Department ID")
+tree_department_DepartmentID_label.grid(row=3, column=0)
+
+tree_department_Name_label = tk.Label(tree_department_frame, text="Name")
+tree_department_Name_label.grid(row=3, column=1)
+
+tree_department_DepartmentID = tk.Entry(tree_department_frame)
+tree_department_DepartmentID.grid(row=4, column=0)
+
+tree_department_Name = tk.Entry(tree_department_frame)
+tree_department_Name.grid(row=4, column=1)
+
+delete_one_department_btn = tk.Button(database, text="Delete One Selected", command=delete_one_department)
+delete_one_department_btn.grid(row=5, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 # Code for add_department
 def enter():
