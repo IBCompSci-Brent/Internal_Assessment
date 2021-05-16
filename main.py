@@ -104,6 +104,16 @@ for department in data:
 
 tree.grid(row=0, column=0, pady=10, padx=10, ipadx=138)
 
+def up():
+    lines = tree.selection()
+    for line in lines:
+        tree.move(line, tree.parent(line), tree.index(line) - 1)
+
+def down():
+    lines = tree.selection()
+    for line in reversed(lines):
+        tree.move(line, tree.parent(line), tree.index(line) + 1)
+
 def clear_department_entries():
     tree_department_DepartmentID.delete(0, END)
     tree_department_Name.delete(0, END)
@@ -145,6 +155,12 @@ delete_department_btn.grid(row=5, column=0, columnspan=2, pady=10, padx=10, ipad
 
 clear_department_entries_btn = tk.Button(database, text="Clear Entries", command=clear_department_entries)
 clear_department_entries_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
+department_up_btn = tk.Button(database, text="Move Up", command=up)
+department_up_btn.grid(row=7, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
+department_down_btn = tk.Button(database, text="Move Down", command=down)
+department_down_btn.grid(row=8, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 tree.bind("<ButtonRelease-1>", select_department)
 
