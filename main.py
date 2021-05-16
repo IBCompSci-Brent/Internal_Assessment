@@ -90,33 +90,19 @@ tree.heading("#0", text="", anchor=W)
 tree.heading("DepartmentID", text="Department ID", anchor=CENTER)
 tree.heading("Name", text="Name", anchor=W)
 
-data = [
-    ["1", "Finance"],
-    ["2", "Human Resources"],
-    ["3", "Sales"],
-    ["4", "Research"]
-]
-
-count = 0
-for department in data:
-    tree.insert(parent='', index='end', iid=count, text="", values=(department[0], department[1]))
-    count += 1
-
 tree.grid(row=0, column=0, pady=10, padx=10, ipadx=138)
 
-def up():
-    lines = tree.selection()
-    for line in lines:
-        tree.move(line, tree.parent(line), tree.index(line) - 1)
-
-def down():
-    lines = tree.selection()
-    for line in reversed(lines):
-        tree.move(line, tree.parent(line), tree.index(line) + 1)
-
-def clear_department_entries():
-    tree_department_DepartmentID.delete(0, END)
-    tree_department_Name.delete(0, END)
+def query_database():
+    conn = sqlite3.connect('company.db')
+    c = conn.cursor()
+    c.execute("SELECT * FROM departments")
+    items = c.fetchall()
+    count = 0
+    for department in items:
+        tree.insert(parent='', index='end', iid=count, text="", values=(department[0], department[1]))
+        count += 1
+    conn.commit()
+    conn.close()
 
 def select_department(e):
     tree_department_DepartmentID.delete(0, END)
@@ -128,6 +114,10 @@ def select_department(e):
     tree_department_DepartmentID.insert(0, values[0])
     tree_department_Name.insert(0, values[1])
 
+def clear_department_entries():
+    tree_department_DepartmentID.delete(0, END)
+    tree_department_Name.delete(0, END)
+
 def update_department():
     selected = tree.focus()
     tree.item(selected, text="", values=(tree_department_DepartmentID.get(), tree_department_Name.get()))
@@ -137,6 +127,16 @@ def update_department():
 def delete_department():
     a = tree.selection()[0]
     tree.delete(a)
+
+def up():
+    lines = tree.selection()
+    for line in lines:
+        tree.move(line, tree.parent(line), tree.index(line) - 1)
+
+def down():
+    lines = tree.selection()
+    for line in reversed(lines):
+        tree.move(line, tree.parent(line), tree.index(line) + 1)
 
 tree_department_frame = Frame(database)
 tree_department_frame.grid(row=1, column=0)
@@ -354,4 +354,5 @@ cancel_from_add_record_btn = tk.Button(add_record, text="Cancel", command=lambda
 cancel_from_add_record_btn.grid(row=8, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 show_frame(first)
+query_database()
 root.mainloop()
