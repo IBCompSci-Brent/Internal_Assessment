@@ -20,7 +20,7 @@ c.execute("""CREATE TABLE IF NOT EXISTS employees (
         Social_Security_Number integer,
         Year_Joined text,
         DepartmentID integer,
-        FOREIGN KEY (departmentID) REFERENCES departments (departmentID)
+        FOREIGN KEY (DepartmentID) REFERENCES departments (DepartmentID)
     )""")
 c.execute("""CREATE TABLE IF NOT EXISTS records (
         ID integer,
