@@ -97,6 +97,7 @@ def query_database():
     c = conn.cursor()
     c.execute("SELECT * FROM departments")
     items = c.fetchall()
+    global count
     count = 0
     for department in items:
         tree.insert(parent='', index='end', iid=count, text="", values=(department[0], department[1]))
