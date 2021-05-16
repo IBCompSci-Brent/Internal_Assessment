@@ -152,6 +152,21 @@ def delete_department():
     a = tree.selection()[0]
     tree.delete(a)
 
+    conn = sqlite3.connect('company.db')
+    c = conn.cursor()
+
+    c.execute("DELETE FROM departments WHERE oid= :oid",
+              {
+                  'Name': tree_department_Name.get(),
+                  'oid': tree_department_DepartmentID.get(),
+              })
+
+    conn.commit()
+    conn.close()
+
+    tree_department_DepartmentID.delete(0, END)
+    tree_department_Name.delete(0, END)
+
 def up():
     lines = tree.selection()
     for line in lines:
