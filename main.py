@@ -355,3 +355,4 @@ cancel_from_add_record_btn.grid(row=8, column=0, columnspan=2, pady=10, padx=10,
 
 show_frame(first)
 query_database()
+root.mainloop()
