@@ -22,8 +22,9 @@ container.grid_columnconfigure(0, weight=1)
 first = tk.Frame(container)
 home = tk.Frame(container)
 department = tk.Frame(container)
+employee = tk.Frame(container)
 
-for F in (first, home, department):
+for F in (first, home, department, employee):
     F.grid(row=0, column=0, sticky="nsew")
 
 def show_frame(frame_to_raise):
@@ -92,6 +93,9 @@ def query_database():
         count += 1
     conn.commit()
     conn.close()
+
+def open_employee(e):
+    show_frame(employee)
 
 def select_department(e):
     tree_department_DepartmentID.delete(0, END)
@@ -214,7 +218,7 @@ cancel_from_department_btn = tk.Button(department, text="Cancel", command=lambda
 cancel_from_department_btn.grid(row=10, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 tree.bind("<ButtonRelease-1>", select_department)
-
+tree.bind("<Return>", open_employee)
 
 show_frame(first)
 query_database()
