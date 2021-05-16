@@ -145,6 +145,7 @@ def update_department():
     conn.commit()
     conn.close()
 
+    tree_department_DepartmentID.delete(0, END)
     tree_department_Name.delete(0, END)
 
 def delete_department():
