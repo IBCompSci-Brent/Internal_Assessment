@@ -21,9 +21,9 @@ container.grid_columnconfigure(0, weight=1)
 
 first = tk.Frame(container)
 home = tk.Frame(container)
-database = tk.Frame(container)
+department = tk.Frame(container)
 
-for F in (first, home, database):
+for F in (first, home, department):
     F.grid(row=0, column=0, sticky="nsew")
 
 def show_frame(frame_to_raise):
@@ -60,14 +60,14 @@ cancel_from_first_btn = tk.Button(first, text="Cancel", command=lambda: cancel_c
 cancel_from_first_btn.grid(row=3, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 # Code for home
-database_btn = tk.Button(home, text="Database", command=lambda: show_frame(database))
-database_btn.grid(row=0, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+department_btn = tk.Button(home, text="Database", command=lambda: show_frame(department))
+department_btn.grid(row=0, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 cancel_from_home_btn = tk.Button(home, text="Cancel", command=lambda: show_frame(first))
 cancel_from_home_btn.grid(row=4, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 # Code for database
-tree = ttk.Treeview(database)
+tree = ttk.Treeview(department)
 tree['columns'] = ("DepartmentID", "Name")
 
 tree.column("#0", width=0, stretch=NO)
@@ -177,7 +177,7 @@ def down():
     for line in reversed(lines):
         tree.move(line, tree.parent(line), tree.index(line) + 1)
 
-tree_department_frame = Frame(database)
+tree_department_frame = Frame(department)
 tree_department_frame.grid(row=1, column=0)
 
 tree_department_DepartmentID_label = tk.Label(tree_department_frame, text="Department ID")
@@ -192,25 +192,25 @@ tree_department_DepartmentID.grid(row=3, column=0)
 tree_department_Name = tk.Entry(tree_department_frame)
 tree_department_Name.grid(row=3, column=1)
 
-clear_department_entries_btn = tk.Button(database, text="Clear Entries", command=clear_department_entries)
+clear_department_entries_btn = tk.Button(department, text="Clear Entries", command=clear_department_entries)
 clear_department_entries_btn.grid(row=4, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
-add_department_btn = tk.Button(database, text="Add Department", command=add_department)
+add_department_btn = tk.Button(department, text="Add Department", command=add_department)
 add_department_btn.grid(row=5, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
-update_department_btn = tk.Button(database, text="Update Department", command=update_department)
+update_department_btn = tk.Button(department, text="Update Department", command=update_department)
 update_department_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
-delete_department_btn = tk.Button(database, text="Delete Department", command=delete_department)
+delete_department_btn = tk.Button(department, text="Delete Department", command=delete_department)
 delete_department_btn.grid(row=7, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
-department_up_btn = tk.Button(database, text="↑", command=up)
+department_up_btn = tk.Button(department, text="↑", command=up)
 department_up_btn.grid(row=8, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
-department_down_btn = tk.Button(database, text="↓", command=down)
+department_down_btn = tk.Button(department, text="↓", command=down)
 department_down_btn.grid(row=9, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
-cancel_from_department_btn = tk.Button(database, text="Cancel", command=lambda: show_frame(home))
+cancel_from_department_btn = tk.Button(department, text="Cancel", command=lambda: show_frame(home))
 cancel_from_department_btn.grid(row=10, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 tree.bind("<ButtonRelease-1>", select_department)
