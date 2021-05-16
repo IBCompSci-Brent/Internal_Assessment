@@ -104,7 +104,21 @@ for department in data:
 
 tree.grid(row=0, column=0, pady=10, padx=10, ipadx=138)
 
-def delete_one_department():
+def clear_department_entries():
+    tree_department_DepartmentID.delete(0, END)
+    tree_department_Name.delete(0, END)
+
+def select_department(e):
+    tree_department_DepartmentID.delete(0, END)
+    tree_department_Name.delete(0, END)
+
+    selected = tree.focus()
+    values = tree.item(selected, 'values')
+
+    tree_department_DepartmentID.insert(0, values[0])
+    tree_department_Name.insert(0, values[1])
+
+def delete_department():
     a = tree.selection()[0]
     tree.delete(a)
 
@@ -126,8 +140,13 @@ tree_department_DepartmentID.grid(row=4, column=0)
 tree_department_Name = tk.Entry(tree_department_frame)
 tree_department_Name.grid(row=4, column=1)
 
-delete_one_department_btn = tk.Button(database, text="Delete One Selected", command=delete_one_department)
-delete_one_department_btn.grid(row=5, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+delete_department_btn = tk.Button(database, text="Delete Department", command=delete_department)
+delete_department_btn.grid(row=5, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
+clear_department_entries_btn = tk.Button(database, text="Clear Entries", command=clear_department_entries)
+clear_department_entries_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
+tree.bind("<ButtonRelease-1>", select_department)
 
 # Code for add_department
 def enter():
