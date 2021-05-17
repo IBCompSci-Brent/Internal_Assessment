@@ -8,7 +8,7 @@ from tkinter import messagebox as mb
 LARGE_FONT = ("Verdana", 12)
 root = tk.Tk()
 root.title('Company Database')
-root.geometry('1000x600')
+root.geometry('1000x621')
 container = tk.Frame(root)
 
 conn = sqlite3.connect('company.db')
@@ -220,22 +220,22 @@ tree.bind("<Return>", open_employee)
 
 # Code for employee
 tree2 = ttk.Treeview(employee)
-tree2.grid(row=0, column=0, pady=10, padx=10, ipadx=48)
+tree2.pack(pady=10, padx=10)
 tree2['columns'] = ("ID", "Name", "DOB", "Gender", "Department", "Position", "Phone_Number", "Email", "Account", "Account_Number", "Social_Security_Number", "Joined")
 
 tree2.column("#0", width=0, stretch=NO)
-tree2.column("ID", anchor=CENTER, width=80)
-tree2.column("Name", anchor=W, width=80)
-tree2.column("DOB", anchor=W, width=80)
-tree2.column("Gender", anchor=W, width=80)
-tree2.column("Department", anchor=W, width=80)
-tree2.column("Position", anchor=W, width=80)
-tree2.column("Phone_Number", anchor=W, width=80)
-tree2.column("Email", anchor=W, width=80)
-tree2.column("Account", anchor=W, width=80)
-tree2.column("Account_Number", anchor=W, width=80)
-tree2.column("Social_Security_Number", anchor=W, width=80)
-tree2.column("Joined", anchor=W, width=80)
+tree2.column("ID", anchor=CENTER, width=180)
+tree2.column("Name", anchor=W, width=180)
+tree2.column("DOB", anchor=W, width=180)
+tree2.column("Gender", anchor=W, width=180)
+tree2.column("Department", anchor=W, width=180)
+tree2.column("Position", anchor=W, width=180)
+tree2.column("Phone_Number", anchor=W, width=180)
+tree2.column("Email", anchor=W, width=180)
+tree2.column("Account", anchor=W, width=180)
+tree2.column("Account_Number", anchor=W, width=180)
+tree2.column("Social_Security_Number", anchor=W, width=180)
+tree2.column("Joined", anchor=W, width=180)
 
 tree2.heading("#0", text="", anchor=W)
 tree2.heading("ID", text="ID", anchor=CENTER)
@@ -262,6 +262,81 @@ def query_employee_table():
         count += 1
     conn.commit()
     conn.close()
+
+tree_employee_frame = tk.Frame(employee)
+tree_employee_frame.pack(fill="y", expand="yes")
+
+tree_employee_ID_label = tk.Label(tree_employee_frame, text="ID")
+tree_employee_ID_label.grid(row=0, column=0)
+
+tree_employee_Name_label = tk.Label(tree_employee_frame, text="Name")
+tree_employee_Name_label.grid(row=0, column=1)
+
+tree_employee_DOB_label = tk.Label(tree_employee_frame, text="DOB")
+tree_employee_DOB_label.grid(row=0, column=2)
+
+tree_employee_Gender_label = tk.Label(tree_employee_frame, text="Gender")
+tree_employee_Gender_label.grid(row=0, column=3)
+
+tree_employee_Department_label = tk.Label(tree_employee_frame, text="Department")
+tree_employee_Department_label.grid(row=0, column=4)
+
+tree_employee_Position_label = tk.Label(tree_employee_frame, text="Position")
+tree_employee_Position_label.grid(row=2, column=0)
+
+tree_employee_Phone_Number_label = tk.Label(tree_employee_frame, text="Phone")
+tree_employee_Phone_Number_label.grid(row=2, column=1)
+
+tree_employee_Email_label = tk.Label(tree_employee_frame, text="Email")
+tree_employee_Email_label.grid(row=2, column=2)
+
+tree_employee_Account_label = tk.Label(tree_employee_frame, text="Account")
+tree_employee_Account_label.grid(row=2, column=3)
+
+tree_employee_Account_Number_label = tk.Label(tree_employee_frame, text="Account No")
+tree_employee_Account_Number_label.grid(row=2, column=4)
+
+tree_employee_Social_Security_Number_label = tk.Label(tree_employee_frame, text="SSS")
+tree_employee_Social_Security_Number_label.grid(row=4, column=0)
+
+tree_employee_Joined_label = tk.Label(tree_employee_frame, text="Joined")
+tree_employee_Joined_label.grid(row=4, column=1)
+
+tree_employee_ID = tk.Entry(tree_employee_frame)
+tree_employee_ID.grid(row=1, column=0)
+
+tree_employee_Name = tk.Entry(tree_employee_frame)
+tree_employee_Name.grid(row=1, column=1)
+
+tree_employee_DOB = tk.Entry(tree_employee_frame)
+tree_employee_DOB.grid(row=1, column=2)
+
+tree_employee_Gender = tk.Entry(tree_employee_frame)
+tree_employee_Gender.grid(row=1, column=3)
+
+tree_employee_Department = tk.Entry(tree_employee_frame)
+tree_employee_Department.grid(row=1, column=4)
+
+tree_employee_Position = tk.Entry(tree_employee_frame)
+tree_employee_Position.grid(row=3, column=0)
+
+tree_employee_Phone_Number = tk.Entry(tree_employee_frame)
+tree_employee_Phone_Number.grid(row=3, column=1)
+
+tree_employee_Email = tk.Entry(tree_employee_frame)
+tree_employee_Email.grid(row=3, column=2)
+
+tree_employee_Account = tk.Entry(tree_employee_frame)
+tree_employee_Account.grid(row=3, column=3)
+
+tree_employee_Account_Number = tk.Entry(tree_employee_frame)
+tree_employee_Account_Number.grid(row=3, column=4)
+
+tree_employee_Social_Security_Number = tk.Entry(tree_employee_frame)
+tree_employee_Social_Security_Number.grid(row=5, column=0)
+
+tree_employee_Joined = tk.Entry(tree_employee_frame)
+tree_employee_Joined.grid(row=5, column=1)
 
 
 show_frame(first)
