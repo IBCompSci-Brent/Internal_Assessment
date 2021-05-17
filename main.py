@@ -293,8 +293,19 @@ def select_employee(e):
     tree_employee_Social_Security_Number.insert(0, values[10])
     tree_employee_Joined.insert(0, values[11])
 
-
-
+def clear_employee_entries():
+    tree_employee_ID.delete(0, END)
+    tree_employee_Name.delete(0, END)
+    tree_employee_DOB.delete(0, END)
+    tree_employee_Gender.delete(0, END)
+    tree_employee_Department.delete(0, END)
+    tree_employee_Position.delete(0, END)
+    tree_employee_Phone_Number.delete(0, END)
+    tree_employee_Email.delete(0, END)
+    tree_employee_Account.delete(0, END)
+    tree_employee_Account_Number.delete(0, END)
+    tree_employee_Social_Security_Number.delete(0, END)
+    tree_employee_Joined.delete(0, END)
 
 tree_employee_frame = tk.Frame(employee)
 tree_employee_frame.pack(fill="y", expand="yes")
@@ -371,8 +382,10 @@ tree_employee_Social_Security_Number.grid(row=5, column=0)
 tree_employee_Joined = tk.Entry(tree_employee_frame)
 tree_employee_Joined.grid(row=5, column=1)
 
-tree2.bind("<ButtonRelease-1>", select_employee)
+clear_employee_entries_btn = tk.Button(tree_employee_frame, text="Clear Entries", command=clear_employee_entries)
+clear_employee_entries_btn.grid(row=6, column=0, columnspan=5, pady=10, padx=10, ipadx=100)
 
+tree2.bind("<ButtonRelease-1>", select_employee)
 
 show_frame(first)
 query_department_table()
