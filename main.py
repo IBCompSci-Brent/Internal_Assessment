@@ -169,12 +169,12 @@ def delete_department():
     tree_department_DepartmentID.delete(0, END)
     tree_department_Name.delete(0, END)
 
-def up():
+def department_up():
     lines = tree.selection()
     for line in lines:
         tree.move(line, tree.parent(line), tree.index(line) - 1)
 
-def down():
+def department_down():
     lines = tree.selection()
     for line in reversed(lines):
         tree.move(line, tree.parent(line), tree.index(line) + 1)
@@ -206,10 +206,10 @@ update_department_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipad
 delete_department_btn = tk.Button(department, text="Delete Department", command=delete_department)
 delete_department_btn.grid(row=7, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
-department_up_btn = tk.Button(department, text="↑", command=up)
+department_up_btn = tk.Button(department, text="↑", command=department_up)
 department_up_btn.grid(row=8, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
-department_down_btn = tk.Button(department, text="↓", command=down)
+department_down_btn = tk.Button(department, text="↓", command=department_down)
 department_down_btn.grid(row=9, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 cancel_from_department_btn = tk.Button(department, text="Cancel", command=lambda: show_frame(home))
@@ -436,6 +436,16 @@ def delete_employee():
     tree_employee_Social_Security_Number.delete(0, END)
     tree_employee_Joined.delete(0, END)
 
+def employee_up():
+    lines = tree.selection()
+    for line in lines:
+        tree2.move(line, tree2.parent(line), tree2.index(line) - 1)
+
+def employee_down():
+    lines = tree.selection()
+    for line in reversed(lines):
+        tree2.move(line, tree2.parent(line), tree2.index(line) + 1)
+
 tree_employee_frame = tk.Frame(employee)
 tree_employee_frame.pack(fill="y", expand="yes")
 
@@ -522,6 +532,15 @@ update_employee_btn.grid(row=7, column=0, columnspan=3, pady=10, padx=10, ipadx=
 
 delete_employee_btn = tk.Button(tree_employee_frame, text="Delete Employee", command=delete_employee)
 delete_employee_btn.grid(row=7, column=2, columnspan=3, pady=10, padx=10, ipadx=100)
+
+employee_up_btn = tk.Button(tree_employee_frame, text="↑", command=employee_up)
+employee_up_btn.grid(row=8, column=0, columnspan=3, pady=10, padx=10, ipadx=100)
+
+employee_down_btn = tk.Button(tree_employee_frame, text="↓", command=employee_down)
+employee_down_btn.grid(row=8, column=2, columnspan=3, pady=10, padx=10, ipadx=100)
+
+cancel_from_employee_btn = tk.Button(tree_employee_frame, text="Cancel", command=lambda: show_frame(home))
+cancel_from_employee_btn.grid(row=9, column=1, columnspan=3, pady=10, padx=100, ipadx=150)
 
 tree2.bind("<ButtonRelease-1>", select_employee)
 
