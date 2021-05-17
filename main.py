@@ -81,12 +81,11 @@ tree.heading("Name", text="Name", anchor=W)
 
 tree.grid(row=0, column=0, pady=10, padx=260, ipadx=138)
 
-def query_database():
+def query_department_table():
     conn = sqlite3.connect('company.db')
     c = conn.cursor()
     c.execute("SELECT rowid, * FROM departments")
     items = c.fetchall()
-    global count
     count = 0
     for department in items:
         tree.insert(parent='', index='end', iid=count, text="", values=(department[0], department[1]))
@@ -127,7 +126,7 @@ def add_department():
 
     tree.delete(*tree.get_children())
 
-    query_database()
+    query_department_table()
 
 def update_department():
     selected = tree.focus()
@@ -222,13 +221,14 @@ tree.bind("<Return>", open_employee)
 # Code for employee
 tree2 = ttk.Treeview(employee)
 tree2.grid(row=0, column=0, pady=10, padx=10, ipadx=48)
-tree2['columns'] = ("ID", "Name", "DOB", "Gender", "Position", "Phone_Number", "Email", "Account", "Account_Number", "Social_Security_Number", "Joined")
+tree2['columns'] = ("ID", "Name", "DOB", "Gender", "Department", "Position", "Phone_Number", "Email", "Account", "Account_Number", "Social_Security_Number", "Joined")
 
 tree2.column("#0", width=0, stretch=NO)
 tree2.column("ID", anchor=CENTER, width=80)
 tree2.column("Name", anchor=W, width=80)
 tree2.column("DOB", anchor=W, width=80)
 tree2.column("Gender", anchor=W, width=80)
+tree2.column("Department", anchor=W, width=80)
 tree2.column("Position", anchor=W, width=80)
 tree2.column("Phone_Number", anchor=W, width=80)
 tree2.column("Email", anchor=W, width=80)
@@ -242,6 +242,7 @@ tree2.heading("ID", text="ID", anchor=CENTER)
 tree2.heading("Name", text="Name", anchor=W)
 tree2.heading("DOB", text="DOB", anchor=W)
 tree2.heading("Gender", text="Gender", anchor=W)
+tree2.heading("Department", text="Department", anchor=W)
 tree2.heading("Position", text="Position", anchor=W)
 tree2.heading("Phone_Number", text="Phone", anchor=W)
 tree2.heading("Email", text="Email", anchor=W)
@@ -250,7 +251,20 @@ tree2.heading("Account_Number", text="Account No", anchor=W)
 tree2.heading("Social_Security_Number", text="SSS", anchor=W)
 tree2.heading("Joined", text="Joined", anchor=W)
 
+def query_employee_table():
+    conn = sqlite3.connect('company.db')
+    c = conn.cursor()
+    c.execute("SELECT rowid, * FROM employees")
+    items = c.fetchall()
+    count = 0
+    for employee in items:
+        tree2.insert(parent='', index='end', iid=count, text="", values=(employee[0], employee[1], employee[2], employee[3], employee[4], employee[5], employee[6], employee[7], employee[8], employee[9], employee[10], employee[11]))
+        count += 1
+    conn.commit()
+    conn.close()
+
 
 show_frame(first)
-query_database()
+query_department_table()
+query_employee_table()
 root.mainloop()
