@@ -437,12 +437,12 @@ def delete_employee():
     tree_employee_Joined.delete(0, END)
 
 def employee_up():
-    lines = tree.selection()
+    lines = tree2.selection()
     for line in lines:
         tree2.move(line, tree2.parent(line), tree2.index(line) - 1)
 
 def employee_down():
-    lines = tree.selection()
+    lines = tree2.selection()
     for line in reversed(lines):
         tree2.move(line, tree2.parent(line), tree2.index(line) + 1)
 
