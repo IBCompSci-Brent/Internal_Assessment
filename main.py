@@ -518,7 +518,7 @@ add_employee_btn = tk.Button(tree_employee_frame, text="Add Employee", command=a
 add_employee_btn.grid(row=6, column=2, columnspan=3, pady=10, padx=10, ipadx=98)
 
 update_employee_btn = tk.Button(tree_employee_frame, text="Update Employee", command=update_employee)
-update_employee_btn.grid(row=7, column=0, columnspan=3, pady=10, padx=10, ipadx=100)
+update_employee_btn.grid(row=7, column=0, columnspan=3, pady=10, padx=10, ipadx=98)
 
 delete_employee_btn = tk.Button(tree_employee_frame, text="Delete Employee", command=delete_employee)
 delete_employee_btn.grid(row=7, column=2, columnspan=3, pady=10, padx=10, ipadx=100)
