@@ -512,16 +512,16 @@ tree_employee_Joined = tk.Entry(tree_employee_frame)
 tree_employee_Joined.grid(row=5, column=1)
 
 clear_employee_entries_btn = tk.Button(tree_employee_frame, text="Clear Entries", command=clear_employee_entries)
-clear_employee_entries_btn.grid(row=6, column=0, columnspan=5, pady=10, padx=10, ipadx=100)
+clear_employee_entries_btn.grid(row=6, column=0, columnspan=3, pady=10, padx=10, ipadx=102)
 
 add_employee_btn = tk.Button(tree_employee_frame, text="Add Employee", command=add_employee)
-add_employee_btn.grid(row=6, column=6, columnspan=5, pady=10, padx=10, ipadx=100)
+add_employee_btn.grid(row=6, column=2, columnspan=3, pady=10, padx=10, ipadx=98)
 
 update_employee_btn = tk.Button(tree_employee_frame, text="Update Employee", command=update_employee)
-update_employee_btn.grid(row=7, column=0, columnspan=5, pady=10, padx=10, ipadx=100)
+update_employee_btn.grid(row=7, column=0, columnspan=3, pady=10, padx=10, ipadx=100)
 
 delete_employee_btn = tk.Button(tree_employee_frame, text="Delete Employee", command=delete_employee)
-delete_employee_btn.grid(row=7, column=6, columnspan=5, pady=10, padx=10, ipadx=100)
+delete_employee_btn.grid(row=7, column=2, columnspan=3, pady=10, padx=10, ipadx=100)
 
 tree2.bind("<ButtonRelease-1>", select_employee)
 
