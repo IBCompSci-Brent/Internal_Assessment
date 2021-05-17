@@ -14,9 +14,10 @@ c.execute("""CREATE TABLE IF NOT EXISTS employees (
         Position text,
         Phone_Number integer,
         Email text,
-        Bank_Account integer,
+        Account text,
+        Account_Number integer,
         Social_Security_Number integer,
-        Year_Joined text
+        Joined integer
     )""")
 c.execute("""CREATE TABLE IF NOT EXISTS records (
         Name text,
@@ -32,10 +33,10 @@ c.execute("INSERT INTO departments VALUES ('Human Resources')")
 c.execute("INSERT INTO departments VALUES ('Sales')")
 c.execute("INSERT INTO departments VALUES ('Research')")
 
-c.execute("INSERT INTO employees VALUES ('Brent','06-04-04','Male','Finance','CEO','09173236403','brent.tai@britishschoolmanila.org','100000000000','1000000000','01-01-21')")
-c.execute("INSERT INTO employees VALUES ('Hari','06-05-04','Male','Human Resources','Manager','09173236404','hari.denton@britishschoolmanila.org','200000000000','2000000000','01-02-21')")
-c.execute("INSERT INTO employees VALUES ('Kristen','06-06-04','Female','Sales','Employee','09173236405','kristen.tan@britishschoolmanila.org','300000000000','3000000000','01-03-21')")
-c.execute("INSERT INTO employees VALUES ('Vince','06-07-04','Male','Research','COO','09173236405','vince.tiu@britishschoolmanila.org','400000000000','4000000000','01-04-21')")
+c.execute("INSERT INTO employees VALUES ('Brent','06-04-04','Male','Finance','CEO','09173236403','brent.tai@britishschoolmanila.org','RCBC','100000000000','1000000000','010121')")
+c.execute("INSERT INTO employees VALUES ('Hari','06-05-04','Male','Human Resources','Manager','09173236404','hari.denton@britishschoolmanila.org','HSBC','200000000000','2000000000','010221')")
+c.execute("INSERT INTO employees VALUES ('Kristen','06-06-04','Female','Sales','Employee','09173236405','kristen.tan@britishschoolmanila.org','BDO','300000000000','3000000000','010321')")
+c.execute("INSERT INTO employees VALUES ('Vince','06-07-04','Male','Research','COO','09173236405','vince.tiu@britishschoolmanila.org','ICBC','400000000000','4000000000','010421')")
 
 c.execute("INSERT INTO records VALUES ('Brent','03-01-21','9','0','17','0')")
 c.execute("INSERT INTO records VALUES ('Hari','03-02-21','9','30','17','30')")

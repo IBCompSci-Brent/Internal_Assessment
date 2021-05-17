@@ -8,7 +8,7 @@ from tkinter import messagebox as mb
 LARGE_FONT = ("Verdana", 12)
 root = tk.Tk()
 root.title('Company Database')
-root.geometry('500x600')
+root.geometry('1000x600')
 container = tk.Frame(root)
 
 conn = sqlite3.connect('company.db')
@@ -67,7 +67,7 @@ department_btn.grid(row=0, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 cancel_from_home_btn = tk.Button(home, text="Cancel", command=lambda: show_frame(first))
 cancel_from_home_btn.grid(row=4, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
-# Code for database
+# Code for department
 tree = ttk.Treeview(department)
 tree['columns'] = ("DepartmentID", "Name")
 
@@ -79,7 +79,7 @@ tree.heading("#0", text="", anchor=W)
 tree.heading("DepartmentID", text="Department ID", anchor=CENTER)
 tree.heading("Name", text="Name", anchor=W)
 
-tree.grid(row=0, column=0, pady=10, padx=10, ipadx=138)
+tree.grid(row=0, column=0, pady=10, padx=260, ipadx=138)
 
 def query_database():
     conn = sqlite3.connect('company.db')
@@ -120,7 +120,6 @@ def add_department():
               })
 
     conn.commit()
-
     conn.close()
 
     tree_department_DepartmentID.delete(0, END)
@@ -219,6 +218,38 @@ cancel_from_department_btn.grid(row=10, column=0, columnspan=2, pady=10, padx=10
 
 tree.bind("<ButtonRelease-1>", select_department)
 tree.bind("<Return>", open_employee)
+
+# Code for employee
+tree2 = ttk.Treeview(employee)
+tree2.grid(row=0, column=0, pady=10, padx=10, ipadx=48)
+tree2['columns'] = ("ID", "Name", "DOB", "Gender", "Position", "Phone_Number", "Email", "Account", "Account_Number", "Social_Security_Number", "Joined")
+
+tree2.column("#0", width=0, stretch=NO)
+tree2.column("ID", anchor=CENTER, width=80)
+tree2.column("Name", anchor=W, width=80)
+tree2.column("DOB", anchor=W, width=80)
+tree2.column("Gender", anchor=W, width=80)
+tree2.column("Position", anchor=W, width=80)
+tree2.column("Phone_Number", anchor=W, width=80)
+tree2.column("Email", anchor=W, width=80)
+tree2.column("Account", anchor=W, width=80)
+tree2.column("Account_Number", anchor=W, width=80)
+tree2.column("Social_Security_Number", anchor=W, width=80)
+tree2.column("Joined", anchor=W, width=80)
+
+tree2.heading("#0", text="", anchor=W)
+tree2.heading("ID", text="ID", anchor=CENTER)
+tree2.heading("Name", text="Name", anchor=W)
+tree2.heading("DOB", text="DOB", anchor=W)
+tree2.heading("Gender", text="Gender", anchor=W)
+tree2.heading("Position", text="Position", anchor=W)
+tree2.heading("Phone_Number", text="Phone", anchor=W)
+tree2.heading("Email", text="Email", anchor=W)
+tree2.heading("Account", text="Account", anchor=W)
+tree2.heading("Account_Number", text="Account No", anchor=W)
+tree2.heading("Social_Security_Number", text="SSS", anchor=W)
+tree2.heading("Joined", text="Joined", anchor=W)
+
 
 show_frame(first)
 query_database()
