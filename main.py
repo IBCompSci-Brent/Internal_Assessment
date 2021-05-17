@@ -263,6 +263,39 @@ def query_employee_table():
     conn.commit()
     conn.close()
 
+def select_employee(e):
+    tree_employee_ID.delete(0, END)
+    tree_employee_Name.delete(0, END)
+    tree_employee_DOB.delete(0, END)
+    tree_employee_Gender.delete(0, END)
+    tree_employee_Department.delete(0, END)
+    tree_employee_Position.delete(0, END)
+    tree_employee_Phone_Number.delete(0, END)
+    tree_employee_Email.delete(0, END)
+    tree_employee_Account.delete(0, END)
+    tree_employee_Account_Number.delete(0, END)
+    tree_employee_Social_Security_Number.delete(0, END)
+    tree_employee_Joined.delete(0, END)
+
+    selected = tree2.focus()
+    values = tree2.item(selected, 'values')
+
+    tree_employee_ID.insert(0, values[0])
+    tree_employee_Name.insert(0, values[1])
+    tree_employee_DOB.insert(0, values[2])
+    tree_employee_Gender.insert(0, values[3])
+    tree_employee_Department.insert(0, values[4])
+    tree_employee_Position.insert(0, values[5])
+    tree_employee_Phone_Number.insert(0, values[6])
+    tree_employee_Email.insert(0, values[7])
+    tree_employee_Account.insert(0, values[8])
+    tree_employee_Account_Number.insert(0, values[9])
+    tree_employee_Social_Security_Number.insert(0, values[10])
+    tree_employee_Joined.insert(0, values[11])
+
+
+
+
 tree_employee_frame = tk.Frame(employee)
 tree_employee_frame.pack(fill="y", expand="yes")
 
@@ -337,6 +370,8 @@ tree_employee_Social_Security_Number.grid(row=5, column=0)
 
 tree_employee_Joined = tk.Entry(tree_employee_frame)
 tree_employee_Joined.grid(row=5, column=1)
+
+tree2.bind("<ButtonRelease-1>", select_employee)
 
 
 show_frame(first)
