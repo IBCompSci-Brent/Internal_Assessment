@@ -307,6 +307,135 @@ def clear_employee_entries():
     tree_employee_Social_Security_Number.delete(0, END)
     tree_employee_Joined.delete(0, END)
 
+def add_employee():
+    conn = sqlite3.connect('company.db')
+    c = conn.cursor()
+    c.execute("INSERT INTO employees VALUES (:Name, :DOB, :Gender, :Department, :Position, :Phone_Number, :Email, :Account, :Account_Number, :Social_Security_Number, :Joined)",
+              {
+                  'Name': tree_employee_Name.get(),
+                  'DOB': tree_employee_DOB.get(),
+                  'Gender': tree_employee_Gender.get(),
+                  'Department': tree_employee_Department.get(),
+                  'Position': tree_employee_Position.get(),
+                  'Phone_Number': tree_employee_Phone_Number.get(),
+                  'Email': tree_employee_Email.get(),
+                  'Account': tree_employee_Account.get(),
+                  'Account_Number': tree_employee_Account_Number.get(),
+                  'Social_Security_Number': tree_employee_Social_Security_Number.get(),
+                  'Joined': tree_employee_Joined.get(),
+              })
+
+    conn.commit()
+    conn.close()
+
+    tree_employee_ID.delete(0, END)
+    tree_employee_Name.delete(0, END)
+    tree_employee_DOB.delete(0, END)
+    tree_employee_Gender.delete(0, END)
+    tree_employee_Department.delete(0, END)
+    tree_employee_Position.delete(0, END)
+    tree_employee_Phone_Number.delete(0, END)
+    tree_employee_Email.delete(0, END)
+    tree_employee_Account.delete(0, END)
+    tree_employee_Account_Number.delete(0, END)
+    tree_employee_Social_Security_Number.delete(0, END)
+    tree_employee_Joined.delete(0, END)
+
+    tree2.delete(*tree2.get_children())
+
+    query_employee_table()
+
+def update_employee():
+    selected = tree2.focus()
+    tree2.item(selected, text="", values=(tree_employee_ID.get(), tree_employee_Name.get(), tree_employee_DOB.get(), tree_employee_Gender.get(), tree_employee_Department.get(), tree_employee_Position.get(), tree_employee_Phone_Number.get(), tree_employee_Email.get(), tree_employee_Account.get(), tree_employee_Account_Number.get(), tree_employee_Social_Security_Number.get(), tree_employee_Joined.get()))
+
+    conn = sqlite3.connect('company.db')
+
+    c = conn.cursor()
+
+    c.execute("""UPDATE employees SET
+        Name = :Name,
+        DOB = :DOB,
+        Gender = :Gender,
+        Department = :Department,
+        Position = :Position,
+        Phone_Number = :Phone_Number,
+        Email = :Email,
+        Account = :Account,
+        Account_Number = :Account_Number,
+        Social_Security_Number = :Social_Security_Number,
+        Joined = :Joined
+        WHERE oid = :oid""",
+        {
+            'Name': tree_employee_Name.get(),
+            'DOB': tree_employee_DOB.get(),
+            'Gender': tree_employee_Gender.get(),
+            'Department': tree_employee_Department.get(),
+            'Position': tree_employee_Position.get(),
+            'Phone_Number': tree_employee_Phone_Number.get(),
+            'Email': tree_employee_Email.get(),
+            'Account': tree_employee_Account.get(),
+            'Account_Number': tree_employee_Account_Number.get(),
+            'Social_Security_Number': tree_employee_Social_Security_Number.get(),
+            'Joined': tree_employee_Joined.get(),
+            'oid': tree_employee_ID.get(),
+        })
+
+    conn.commit()
+    conn.close()
+
+    tree_employee_ID.delete(0, END)
+    tree_employee_Name.delete(0, END)
+    tree_employee_DOB.delete(0, END)
+    tree_employee_Gender.delete(0, END)
+    tree_employee_Department.delete(0, END)
+    tree_employee_Position.delete(0, END)
+    tree_employee_Phone_Number.delete(0, END)
+    tree_employee_Email.delete(0, END)
+    tree_employee_Account.delete(0, END)
+    tree_employee_Account_Number.delete(0, END)
+    tree_employee_Social_Security_Number.delete(0, END)
+    tree_employee_Joined.delete(0, END)
+
+def delete_employee():
+    a = tree2.selection()[0]
+    tree2.delete(a)
+
+    conn = sqlite3.connect('company.db')
+    c = conn.cursor()
+
+    c.execute("DELETE FROM employees WHERE oid= :oid",
+              {
+                  'Name': tree_employee_Name.get(),
+                  'DOB': tree_employee_DOB.get(),
+                  'Gender': tree_employee_Gender.get(),
+                  'Department': tree_employee_Department.get(),
+                  'Position': tree_employee_Position.get(),
+                  'Phone_Number': tree_employee_Phone_Number.get(),
+                  'Email': tree_employee_Email.get(),
+                  'Account': tree_employee_Account.get(),
+                  'Account_Number': tree_employee_Account_Number.get(),
+                  'Social_Security_Number': tree_employee_Social_Security_Number.get(),
+                  'Joined': tree_employee_Joined.get(),
+                  'oid': tree_employee_ID.get(),
+              })
+
+    conn.commit()
+    conn.close()
+
+    tree_employee_ID.delete(0, END)
+    tree_employee_Name.delete(0, END)
+    tree_employee_DOB.delete(0, END)
+    tree_employee_Gender.delete(0, END)
+    tree_employee_Department.delete(0, END)
+    tree_employee_Position.delete(0, END)
+    tree_employee_Phone_Number.delete(0, END)
+    tree_employee_Email.delete(0, END)
+    tree_employee_Account.delete(0, END)
+    tree_employee_Account_Number.delete(0, END)
+    tree_employee_Social_Security_Number.delete(0, END)
+    tree_employee_Joined.delete(0, END)
+
 tree_employee_frame = tk.Frame(employee)
 tree_employee_frame.pack(fill="y", expand="yes")
 
@@ -384,6 +513,15 @@ tree_employee_Joined.grid(row=5, column=1)
 
 clear_employee_entries_btn = tk.Button(tree_employee_frame, text="Clear Entries", command=clear_employee_entries)
 clear_employee_entries_btn.grid(row=6, column=0, columnspan=5, pady=10, padx=10, ipadx=100)
+
+add_employee_btn = tk.Button(tree_employee_frame, text="Add Employee", command=add_employee)
+add_employee_btn.grid(row=6, column=6, columnspan=5, pady=10, padx=10, ipadx=100)
+
+update_employee_btn = tk.Button(tree_employee_frame, text="Update Employee", command=update_employee)
+update_employee_btn.grid(row=7, column=0, columnspan=5, pady=10, padx=10, ipadx=100)
+
+delete_employee_btn = tk.Button(tree_employee_frame, text="Delete Employee", command=delete_employee)
+delete_employee_btn.grid(row=7, column=6, columnspan=5, pady=10, padx=10, ipadx=100)
 
 tree2.bind("<ButtonRelease-1>", select_employee)
 
