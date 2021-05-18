@@ -655,6 +655,92 @@ def add_record():
 
     query_record_table()
 
+def update_record():
+    selected = tree3.focus()
+    tree3.item(selected, text="", values=(tree_record_ID.get(), tree_record_Name.get(), tree_record_Record_Date_M.get(), tree_record_Record_Date_D.get(), tree_record_Record_Date_Y.get(), tree_record_Time_In_Hour.get(), tree_record_Time_In_Minute.get(), tree_record_Time_Out_Hour.get(), tree_record_Time_Out_Minute.get()))
+
+    conn = sqlite3.connect('company.db')
+
+    c = conn.cursor()
+
+    c.execute("""UPDATE records SET
+        Name = :Name,
+        Record_Date_M = :Record_Date_M,
+        Record_Date_D = :Record_Date_D,
+        Record_Date_Y = :Record_Date_Y,
+        Time_In_Hour = :Time_In_Hour,
+        Time_In_Minute = :Time_In_Minute,
+        Time_Out_Hour = :Time_Out_Hour,
+        Time_Out_Minute = :Time_Out_Minute
+        WHERE oid = :oid""",
+        {
+            'Name': tree_record_Name.get(),
+            'Record_Date_M': tree_record_Record_Date_M.get(),
+            'Record_Date_D': tree_record_Record_Date_D.get(),
+            'Record_Date_Y': tree_record_Record_Date_Y.get(),
+            'Time_In_Hour': tree_record_Time_In_Hour.get(),
+            'Time_In_Minute': tree_record_Time_In_Minute.get(),
+            'Time_Out_Hour': tree_record_Time_Out_Hour.get(),
+            'Time_Out_Minute': tree_record_Time_Out_Minute.get(),
+            'oid': tree_record_ID.get(),
+        })
+
+    conn.commit()
+    conn.close()
+
+    tree_record_ID.delete(0, END)
+    tree_record_Name.delete(0, END)
+    tree_record_Record_Date_M.delete(0, END)
+    tree_record_Record_Date_D.delete(0, END)
+    tree_record_Record_Date_Y.delete(0, END)
+    tree_record_Time_In_Hour.delete(0, END)
+    tree_record_Time_In_Minute.delete(0, END)
+    tree_record_Time_Out_Hour.delete(0, END)
+    tree_record_Time_Out_Minute.delete(0, END)
+
+def delete_record():
+    a = tree3.selection()[0]
+    tree3.delete(a)
+
+    conn = sqlite3.connect('company.db')
+    c = conn.cursor()
+
+    c.execute("DELETE FROM records WHERE oid= :oid",
+              {
+                  'Name': tree_record_Name.get(),
+                  'Record_Date_M': tree_record_Record_Date_M.get(),
+                  'Record_Date_D': tree_record_Record_Date_D.get(),
+                  'Record_Date_Y': tree_record_Record_Date_Y.get(),
+                  'Time_In_Hour': tree_record_Time_In_Hour.get(),
+                  'Time_In_Minute': tree_record_Time_In_Minute.get(),
+                  'Time_Out_Hour': tree_record_Time_Out_Hour.get(),
+                  'Time_Out_Minute': tree_record_Time_Out_Minute.get(),
+                  'oid': tree_record_ID.get(),
+              })
+
+    conn.commit()
+    conn.close()
+
+    tree_record_ID.delete(0, END)
+    tree_record_Name.delete(0, END)
+    tree_record_Record_Date_M.delete(0, END)
+    tree_record_Record_Date_D.delete(0, END)
+    tree_record_Record_Date_Y.delete(0, END)
+    tree_record_Time_In_Hour.delete(0, END)
+    tree_record_Time_In_Minute.delete(0, END)
+    tree_record_Time_Out_Hour.delete(0, END)
+    tree_record_Time_Out_Minute.delete(0, END)
+
+def record_up():
+    lines = tree3.selection()
+    for line in lines:
+        tree3.move(line, tree3.parent(line), tree3.index(line) - 1)
+
+def record_down():
+    lines = tree3.selection()
+    for line in reversed(lines):
+        tree3.move(line, tree3.parent(line), tree3.index(line) + 1)
+
 tree_record_frame = tk.Frame(record)
 tree_record_frame.pack(fill="y", expand="yes")
 
@@ -718,25 +804,22 @@ clear_record_entries_btn.grid(row=4, column=0, columnspan=3, pady=10, padx=10, i
 add_record_btn = tk.Button(tree_record_frame, text="Add Record", command=add_record)
 add_record_btn.grid(row=4, column=2, columnspan=3, pady=10, padx=10, ipadx=98)
 
-update_record_btn = tk.Button(tree_record_frame, text="Update Record")
+update_record_btn = tk.Button(tree_record_frame, text="Update Record", command=update_record)
 update_record_btn.grid(row=5, column=0, columnspan=3, pady=10, padx=10, ipadx=98)
 
-delete_record_btn = tk.Button(tree_record_frame, text="Delete Record")
+delete_record_btn = tk.Button(tree_record_frame, text="Delete Record", command=delete_record)
 delete_record_btn.grid(row=5, column=2, columnspan=3, pady=10, padx=10, ipadx=100)
 
-record_up_btn = tk.Button(tree_record_frame, text="↑")
+record_up_btn = tk.Button(tree_record_frame, text="↑", command=record_up)
 record_up_btn.grid(row=6, column=0, columnspan=3, pady=10, padx=10, ipadx=100)
 
-record_down_btn = tk.Button(tree_record_frame, text="↓")
+record_down_btn = tk.Button(tree_record_frame, text="↓", command=record_down)
 record_down_btn.grid(row=6, column=2, columnspan=3, pady=10, padx=10, ipadx=100)
 
 cancel_from_record_btn = tk.Button(tree_record_frame, text="Cancel", command=lambda: show_frame(home))
 cancel_from_record_btn.grid(row=7, column=1, columnspan=3, pady=10, padx=100, ipadx=150)
 
 tree3.bind("<ButtonRelease-1>", select_record)
-
-
-
 
 show_frame(first)
 query_department_table()
