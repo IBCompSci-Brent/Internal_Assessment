@@ -799,16 +799,16 @@ tree_record_Time_Out_Minute = tk.Entry(tree_record_frame)
 tree_record_Time_Out_Minute.grid(row=3, column=3)
 
 clear_record_entries_btn = tk.Button(tree_record_frame, text="Clear Entries", command=clear_record_entries)
-clear_record_entries_btn.grid(row=4, column=0, columnspan=3, pady=10, padx=10, ipadx=102)
+clear_record_entries_btn.grid(row=4, column=0, columnspan=3, pady=10, padx=10, ipadx=105)
 
 add_record_btn = tk.Button(tree_record_frame, text="Add Record", command=add_record)
-add_record_btn.grid(row=4, column=2, columnspan=3, pady=10, padx=10, ipadx=98)
+add_record_btn.grid(row=4, column=2, columnspan=3, pady=10, padx=10, ipadx=109)
 
 update_record_btn = tk.Button(tree_record_frame, text="Update Record", command=update_record)
-update_record_btn.grid(row=5, column=0, columnspan=3, pady=10, padx=10, ipadx=98)
+update_record_btn.grid(row=5, column=0, columnspan=3, pady=10, padx=10, ipadx=104)
 
 delete_record_btn = tk.Button(tree_record_frame, text="Delete Record", command=delete_record)
-delete_record_btn.grid(row=5, column=2, columnspan=3, pady=10, padx=10, ipadx=100)
+delete_record_btn.grid(row=5, column=2, columnspan=3, pady=10, padx=10, ipadx=107)
 
 record_up_btn = tk.Button(tree_record_frame, text="↑", command=record_up)
 record_up_btn.grid(row=6, column=0, columnspan=3, pady=10, padx=10, ipadx=100)
