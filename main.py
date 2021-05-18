@@ -549,7 +549,197 @@ cancel_from_employee_btn.grid(row=9, column=1, columnspan=3, pady=10, padx=100, 
 tree2.bind("<ButtonRelease-1>", select_employee)
 tree2.bind("<Return>", open_record)
 
+# Code for record
+tree3 = ttk.Treeview(record)
+tree3.pack(pady=10, padx=10)
+tree3['columns'] = ("ID", "Name", "Record_Date_M", "Record_Date_D", "Record_Date_Y", "Time_In_Hour", "Time_In_Minute", "Time_Out_Hour", "Time_Out_Minute")
+
+tree3.column("#0", width=0, stretch=NO)
+tree3.column("ID", anchor=CENTER, width=180)
+tree3.column("Name", anchor=W, width=180)
+tree3.column("Record_Date_M", anchor=W, width=180)
+tree3.column("Record_Date_D", anchor=W, width=180)
+tree3.column("Record_Date_Y", anchor=W, width=180)
+tree3.column("Time_In_Hour", anchor=W, width=180)
+tree3.column("Time_In_Minute", anchor=W, width=180)
+tree3.column("Time_Out_Hour", anchor=W, width=180)
+tree3.column("Time_Out_Minute", anchor=W, width=180)
+
+tree3.heading("#0", text="", anchor=W)
+tree3.heading("ID", text="ID", anchor=CENTER)
+tree3.heading("Name", text="Name", anchor=W)
+tree3.heading("Record_Date_M", text="Month", anchor=W)
+tree3.heading("Record_Date_D", text="Day", anchor=W)
+tree3.heading("Record_Date_Y", text="Year", anchor=W)
+tree3.heading("Time_In_Hour", text="Time In Hour", anchor=W)
+tree3.heading("Time_In_Minute", text="Time In Minute", anchor=W)
+tree3.heading("Time_Out_Hour", text="Time Out Hour", anchor=W)
+tree3.heading("Time_Out_Minute", text="Time Out Minute", anchor=W)
+
+def query_record_table():
+    conn = sqlite3.connect('company.db')
+    c = conn.cursor()
+    c.execute("SELECT rowid, * FROM records")
+    items = c.fetchall()
+    count = 0
+    for record in items:
+        tree3.insert(parent='', index='end', iid=count, text="", values=(record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7], record[8]))
+        count += 1
+    conn.commit()
+    conn.close()
+
+def select_record(e):
+    tree_record_ID.delete(0, END)
+    tree_record_Name.delete(0, END)
+    tree_record_Record_Date_M.delete(0, END)
+    tree_record_Record_Date_D.delete(0, END)
+    tree_record_Record_Date_Y.delete(0, END)
+    tree_record_Time_In_Hour.delete(0, END)
+    tree_record_Time_In_Minute.delete(0, END)
+    tree_record_Time_Out_Hour.delete(0, END)
+    tree_record_Time_Out_Minute.delete(0, END)
+
+    selected = tree3.focus()
+    values = tree3.item(selected, 'values')
+
+    tree_record_ID.insert(0, values[0])
+    tree_record_Name.insert(0, values[1])
+    tree_record_Record_Date_M.insert(0, values[2])
+    tree_record_Record_Date_D.insert(0, values[3])
+    tree_record_Record_Date_Y.insert(0, values[4])
+    tree_record_Time_In_Hour.insert(0, values[5])
+    tree_record_Time_In_Minute.insert(0, values[6])
+    tree_record_Time_Out_Hour.insert(0, values[7])
+    tree_record_Time_Out_Minute.insert(0, values[8])
+
+def clear_record_entries():
+    tree_record_ID.delete(0, END)
+    tree_record_Name.delete(0, END)
+    tree_record_Record_Date_M.delete(0, END)
+    tree_record_Record_Date_D.delete(0, END)
+    tree_record_Record_Date_Y.delete(0, END)
+    tree_record_Time_In_Hour.delete(0, END)
+    tree_record_Time_In_Minute.delete(0, END)
+    tree_record_Time_Out_Hour.delete(0, END)
+    tree_record_Time_Out_Minute.delete(0, END)
+
+def add_record():
+    conn = sqlite3.connect('company.db')
+    c = conn.cursor()
+    c.execute("INSERT INTO records VALUES (:Name, :Record_Date_M, :Record_Date_D, :Record_Date_Y, :Time_In_Hour, :Time_In_Minute, :Time_Out_Hour, :Time_Out_Minute)",
+              {
+                  'Name': tree_record_Name.get(),
+                  'Record_Date_M': tree_record_Record_Date_M.get(),
+                  'Record_Date_D': tree_record_Record_Date_D.get(),
+                  'Record_Date_Y': tree_record_Record_Date_Y.get(),
+                  'Time_In_Hour': tree_record_Time_In_Hour.get(),
+                  'Time_In_Minute': tree_record_Time_In_Minute.get(),
+                  'Time_Out_Hour': tree_record_Time_Out_Hour.get(),
+                  'Time_Out_Minute': tree_record_Time_Out_Minute.get(),
+              })
+
+    conn.commit()
+    conn.close()
+
+    tree_record_ID.delete(0, END)
+    tree_record_Name.delete(0, END)
+    tree_record_Record_Date_M.delete(0, END)
+    tree_record_Record_Date_D.delete(0, END)
+    tree_record_Record_Date_Y.delete(0, END)
+    tree_record_Time_In_Hour.delete(0, END)
+    tree_record_Time_In_Minute.delete(0, END)
+    tree_record_Time_Out_Hour.delete(0, END)
+    tree_record_Time_Out_Minute.delete(0, END)
+
+    tree3.delete(*tree3.get_children())
+
+    query_record_table()
+
+tree_record_frame = tk.Frame(record)
+tree_record_frame.pack(fill="y", expand="yes")
+
+tree_record_ID_label = tk.Label(tree_record_frame, text="ID")
+tree_record_ID_label.grid(row=0, column=0)
+
+tree_record_Name_label = tk.Label(tree_record_frame, text="Name")
+tree_record_Name_label.grid(row=0, column=1)
+
+tree_record_Record_Date_M_label = tk.Label(tree_record_frame, text="Month")
+tree_record_Record_Date_M_label.grid(row=0, column=2)
+
+tree_record_Record_Date_D_label = tk.Label(tree_record_frame, text="Day")
+tree_record_Record_Date_D_label.grid(row=0, column=3)
+
+tree_record_Record_Date_Y_label = tk.Label(tree_record_frame, text="Year")
+tree_record_Record_Date_Y_label.grid(row=0, column=4)
+
+tree_record_Time_In_Hour_label = tk.Label(tree_record_frame, text="Time In Hour")
+tree_record_Time_In_Hour_label.grid(row=2, column=0)
+
+tree_record_Time_In_Minute_label = tk.Label(tree_record_frame, text="Time In Minute")
+tree_record_Time_In_Minute_label.grid(row=2, column=1)
+
+tree_record_Time_Out_Hour_label = tk.Label(tree_record_frame, text="Time Out Hour")
+tree_record_Time_Out_Hour_label.grid(row=2, column=2)
+
+tree_record_Time_Out_Minute_label = tk.Label(tree_record_frame, text="Time Out Minute")
+tree_record_Time_Out_Minute_label.grid(row=2, column=3)
+
+tree_record_ID = tk.Entry(tree_record_frame)
+tree_record_ID.grid(row=1, column=0)
+
+tree_record_Name = tk.Entry(tree_record_frame)
+tree_record_Name.grid(row=1, column=1)
+
+tree_record_Record_Date_M = tk.Entry(tree_record_frame)
+tree_record_Record_Date_M.grid(row=1, column=2)
+
+tree_record_Record_Date_D = tk.Entry(tree_record_frame)
+tree_record_Record_Date_D.grid(row=1, column=3)
+
+tree_record_Record_Date_Y = tk.Entry(tree_record_frame)
+tree_record_Record_Date_Y.grid(row=1, column=4)
+
+tree_record_Time_In_Hour = tk.Entry(tree_record_frame)
+tree_record_Time_In_Hour.grid(row=3, column=0)
+
+tree_record_Time_In_Minute = tk.Entry(tree_record_frame)
+tree_record_Time_In_Minute.grid(row=3, column=1)
+
+tree_record_Time_Out_Hour = tk.Entry(tree_record_frame)
+tree_record_Time_Out_Hour.grid(row=3, column=2)
+
+tree_record_Time_Out_Minute = tk.Entry(tree_record_frame)
+tree_record_Time_Out_Minute.grid(row=3, column=3)
+
+clear_record_entries_btn = tk.Button(tree_record_frame, text="Clear Entries", command=clear_record_entries)
+clear_record_entries_btn.grid(row=4, column=0, columnspan=3, pady=10, padx=10, ipadx=102)
+
+add_record_btn = tk.Button(tree_record_frame, text="Add Record", command=add_record)
+add_record_btn.grid(row=4, column=2, columnspan=3, pady=10, padx=10, ipadx=98)
+
+update_record_btn = tk.Button(tree_record_frame, text="Update Record")
+update_record_btn.grid(row=5, column=0, columnspan=3, pady=10, padx=10, ipadx=98)
+
+delete_record_btn = tk.Button(tree_record_frame, text="Delete Record")
+delete_record_btn.grid(row=5, column=2, columnspan=3, pady=10, padx=10, ipadx=100)
+
+record_up_btn = tk.Button(tree_record_frame, text="↑")
+record_up_btn.grid(row=6, column=0, columnspan=3, pady=10, padx=10, ipadx=100)
+
+record_down_btn = tk.Button(tree_record_frame, text="↓")
+record_down_btn.grid(row=6, column=2, columnspan=3, pady=10, padx=10, ipadx=100)
+
+cancel_from_record_btn = tk.Button(tree_record_frame, text="Cancel", command=lambda: show_frame(home))
+cancel_from_record_btn.grid(row=7, column=1, columnspan=3, pady=10, padx=100, ipadx=150)
+
+tree3.bind("<ButtonRelease-1>", select_record)
+
+
+
+
 show_frame(first)
 query_department_table()
 query_employee_table()
+query_record_table()
 root.mainloop()

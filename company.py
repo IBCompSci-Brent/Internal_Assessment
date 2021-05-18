@@ -21,7 +21,9 @@ c.execute("""CREATE TABLE IF NOT EXISTS employees (
     )""")
 c.execute("""CREATE TABLE IF NOT EXISTS records (
         Name text,
-        Record_Date text,
+        Record_Date_M integer,
+        Record_Date_D integer,
+        Record_Date_Y integer,
         Time_In_Hour integer,
         Time_In_Minute integer,
         Time_Out_Hour integer,
@@ -38,10 +40,10 @@ c.execute("INSERT INTO employees VALUES ('Hari','06-05-04','Male','Human Resourc
 c.execute("INSERT INTO employees VALUES ('Kristen','06-06-04','Female','Sales','Employee','09173236405','kristen.tan@britishschoolmanila.org','BDO','300000000000','3000000000','010321')")
 c.execute("INSERT INTO employees VALUES ('Vince','06-07-04','Male','Research','COO','09173236405','vince.tiu@britishschoolmanila.org','ICBC','400000000000','4000000000','010421')")
 
-c.execute("INSERT INTO records VALUES ('Brent','03-01-21','9','0','17','0')")
-c.execute("INSERT INTO records VALUES ('Hari','03-02-21','9','30','17','30')")
-c.execute("INSERT INTO records VALUES ('Kristen','03-03-21','10','0','18','0')")
-c.execute("INSERT INTO records VALUES ('Vince','03-04-21','10','30','18','30')")
+c.execute("INSERT INTO records VALUES ('Brent','03','01','21','9','0','17','0')")
+c.execute("INSERT INTO records VALUES ('Hari','03','02','21','9','30','17','30')")
+c.execute("INSERT INTO records VALUES ('Kristen','03','03','21','10','0','18','0')")
+c.execute("INSERT INTO records VALUES ('Vince','03','04','21','10','30','18','30')")
 
 conn.commit()
 conn.close()
