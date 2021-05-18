@@ -46,14 +46,14 @@ def enter_command():
         Passcode.delete(0, END)
 
 Username = tk.Entry(first, width=30)
-Username.grid(row=0, column=1, padx=20)
+Username.grid(row=0, column=1, pady=10)
 Passcode = tk.Entry(first, width=30, show="•")
-Passcode.grid(row=1, column=1)
+Passcode.grid(row=1, column=1, pady=10)
 
 Username_label = tk.Label(first, text="Username", font=LARGE_FONT)
-Username_label.grid(row=0, column=0)
+Username_label.grid(row=0, column=0, pady=10, padx=10)
 Passcode_label = tk.Label(first, text="Passcode", font=LARGE_FONT)
-Passcode_label.grid(row=1, column=0)
+Passcode_label.grid(row=1, column=0, pady=10, padx=10)
 
 home_btn = tk.Button(first, text="Enter", command=lambda: enter_command())
 home_btn.grid(row=2, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
