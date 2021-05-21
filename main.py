@@ -62,11 +62,17 @@ cancel_from_first_btn = tk.Button(first, text="Cancel", command=lambda: cancel_c
 cancel_from_first_btn.grid(row=3, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 # Code for home
-department_btn = tk.Button(home, text="Database", command=lambda: show_frame(department))
+department_btn = tk.Button(home, text="Departments", command=lambda: show_frame(department))
 department_btn.grid(row=0, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
+employee_btn = tk.Button(home, text="Employees", command=lambda: show_frame(employee))
+employee_btn.grid(row=1, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
+record_btn = tk.Button(home, text="Records", command=lambda: show_frame(record))
+record_btn.grid(row=2, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
 cancel_from_home_btn = tk.Button(home, text="Cancel", command=lambda: show_frame(first))
-cancel_from_home_btn.grid(row=4, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+cancel_from_home_btn.grid(row=3, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 # Code for department
 tree = ttk.Treeview(department)
@@ -93,9 +99,6 @@ def query_department_table():
         count += 1
     conn.commit()
     conn.close()
-
-def open_employee(e):
-    show_frame(employee)
 
 def select_department(e):
     tree_department_DepartmentID.delete(0, END)
@@ -217,7 +220,6 @@ cancel_from_department_btn = tk.Button(department, text="Cancel", command=lambda
 cancel_from_department_btn.grid(row=10, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 tree.bind("<ButtonRelease-1>", select_department)
-tree.bind("<Return>", open_employee)
 
 # Code for employee
 tree2 = ttk.Treeview(employee)
@@ -263,9 +265,6 @@ def query_employee_table():
         count += 1
     conn.commit()
     conn.close()
-
-def open_record(e):
-    show_frame(record)
 
 def select_employee(e):
     tree_employee_ID.delete(0, END)
@@ -547,7 +546,6 @@ cancel_from_employee_btn = tk.Button(tree_employee_frame, text="Cancel", command
 cancel_from_employee_btn.grid(row=9, column=1, columnspan=3, pady=10, padx=100, ipadx=150)
 
 tree2.bind("<ButtonRelease-1>", select_employee)
-tree2.bind("<Return>", open_record)
 
 # Code for record
 tree3 = ttk.Treeview(record)
