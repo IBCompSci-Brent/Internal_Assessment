@@ -46,5 +46,4 @@ c.execute("INSERT INTO records VALUES ('Kristen','03','03','21','10','0','18','0
 c.execute("INSERT INTO records VALUES ('Vince','03','04','21','10','30','18','30')")
 
 conn.commit()
-conn.close()
 
