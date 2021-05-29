@@ -24,8 +24,9 @@ home = tk.Frame(container)
 department = tk.Frame(container)
 employee = tk.Frame(container)
 record = tk.Frame(container)
+salaries = tk.Frame(container)
 
-for F in (first, home, department, employee, record):
+for F in (first, home, department, employee, record, salaries):
     F.grid(row=0, column=0, sticky="nsew")
 
 def show_frame(frame_to_raise):
@@ -71,8 +72,11 @@ employee_btn.grid(row=1, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 record_btn = tk.Button(home, text="Records", command=lambda: show_frame(record))
 record_btn.grid(row=2, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
+salaries_btn = tk.Button(home, text="Salaries", command=lambda: show_frame(salaries))
+salaries_btn.grid(row=3, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
 cancel_from_home_btn = tk.Button(home, text="Cancel", command=lambda: show_frame(first))
-cancel_from_home_btn.grid(row=3, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+cancel_from_home_btn.grid(row=4, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 # Code for department
 tree = ttk.Treeview(department)
@@ -818,6 +822,44 @@ cancel_from_record_btn = tk.Button(tree_record_frame, text="Cancel", command=lam
 cancel_from_record_btn.grid(row=7, column=1, columnspan=3, pady=10, padx=100, ipadx=150)
 
 tree3.bind("<ButtonRelease-1>", select_record)
+
+# Code for salaries
+def compute_salaries():
+    conn = sqlite3.connect('company.db')
+    c = conn.cursor()
+
+
+
+
+
+
+    conn.commit()
+    conn.close()
+
+
+salaries_Name = tk.Entry(salaries, width=30)
+salaries_Name.grid(row=0, column=1, pady=10)
+
+salaries_Record_Date_M = tk.Entry(salaries, width=30)
+salaries_Record_Date_M.grid(row=1, column=1, pady=10)
+
+salaries_Record_Date_Y = tk.Entry(salaries, width=30)
+salaries_Record_Date_Y.grid(row=2, column=1, pady=10)
+
+salaries_Name_label = tk.Label(salaries, text="Name", font=LARGE_FONT)
+salaries_Name_label.grid(row=0, column=0, pady=10, padx=10)
+
+salaries_Record_Date_M_label = tk.Label(salaries, text="Month", font=LARGE_FONT)
+salaries_Record_Date_M_label.grid(row=1, column=0, pady=10, padx=10)
+
+salaries_Record_Date_Y_label = tk.Label(salaries, text="Year", font=LARGE_FONT)
+salaries_Record_Date_Y_label.grid(row=2, column=0, pady=10, padx=10)
+
+compute_salaries_btn = tk.Button(salaries, text="Compute")
+compute_salaries_btn.grid(row=3, column=0, columnspan=3, pady=10, padx=10, ipadx=100)
+
+cancel_from_salaries_btn = tk.Button(salaries, text="Cancel", command=lambda: show_frame(home))
+cancel_from_salaries_btn.grid(row=4, column=0, columnspan=3, pady=10, padx=10, ipadx=100)
 
 show_frame(first)
 query_department_table()
