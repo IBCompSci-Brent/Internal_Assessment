@@ -832,6 +832,8 @@ def compute_salaries():
     as wages FROM employees, records 
     WHERE records.EmployeeID = employees.EmployeeID 
     AND employees.Name like "%''' + salaries_Name.get() + '''%"
+    AND records.Record_Date_M like "%''' + salaries_Record_Date_M.get() + '''%"
+    AND records.Record_Date_Y like "%''' + salaries_Record_Date_Y.get() + '''%"
     GROUP BY employees.EmployeeID''')
     data = c.fetchone()
     txt_wage.set(data[1])
