@@ -827,15 +827,16 @@ tree3.bind("<ButtonRelease-1>", select_record)
 def compute_salaries():
     conn = sqlite3.connect('company.db')
     c = conn.cursor()
-
-
-
-
-
-
+    c.execute('''SELECT employees.EmployeeID,
+    sum(employees.Salary * (((records.Time_Out_Hour * 60 + records.Time_Out_Minute)/60) - ((records.Time_In_Hour * 60 + records.Time_In_Minute)/60))) 
+    as wages FROM employees, records 
+    WHERE records.EmployeeID = employees.EmployeeID 
+    AND employees.Name like "%''' + salaries_Name.get() + '''%"
+    GROUP BY employees.EmployeeID''')
+    data = c.fetchone()
+    txt_wage.set(data[1])
     conn.commit()
     conn.close()
-
 
 salaries_Name = tk.Entry(salaries, width=30)
 salaries_Name.grid(row=0, column=1, pady=10)
@@ -855,11 +856,15 @@ salaries_Record_Date_M_label.grid(row=1, column=0, pady=10, padx=10)
 salaries_Record_Date_Y_label = tk.Label(salaries, text="Year", font=LARGE_FONT)
 salaries_Record_Date_Y_label.grid(row=2, column=0, pady=10, padx=10)
 
-compute_salaries_btn = tk.Button(salaries, text="Compute")
+compute_salaries_btn = tk.Button(salaries, text="Compute", command=compute_salaries)
 compute_salaries_btn.grid(row=3, column=0, columnspan=3, pady=10, padx=10, ipadx=100)
 
 cancel_from_salaries_btn = tk.Button(salaries, text="Cancel", command=lambda: show_frame(home))
 cancel_from_salaries_btn.grid(row=4, column=0, columnspan=3, pady=10, padx=10, ipadx=100)
+
+txt_wage = StringVar()
+wage = tk.Entry(salaries, width=30, textvariable=txt_wage)
+wage.grid(row=5, column=0, pady=10)
 
 show_frame(first)
 query_department_table()
