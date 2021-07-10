@@ -866,7 +866,7 @@ cancel_from_salaries_btn.grid(row=4, column=0, columnspan=3, pady=10, padx=10, i
 
 txt_wage = StringVar()
 wage = tk.Entry(salaries, width=30, textvariable=txt_wage)
-wage.grid(row=5, column=0, pady=10)
+wage.grid(row=5, column=0, columnspan=3, pady=10, padx=10, ipadx=100)
 
 show_frame(first)
 query_department_table()
