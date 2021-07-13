@@ -929,4 +929,3 @@ query_department_table()
 query_employee_table()
 query_record_table()
 root.mainloop()
-1
