@@ -67,3 +67,4 @@ c.execute("INSERT INTO records VALUES ('Sam','04','04','21','10','30','18','30',
 
 conn.commit()
 conn.close()
+1
