@@ -229,7 +229,8 @@ tree.bind("<ButtonRelease-1>", select_department)
 # Code for employee
 tree2 = ttk.Treeview(employee)
 tree2.pack(pady=10, padx=10)
-tree2['columns'] = ("Name", "DOB", "Gender", "Department", "Position", "Phone_Number", "Email", "Account", "Account_Number", "Social_Security_Number", "Joined", "Salary", "EmployeeID", "DepartmentID")
+tree2['columns'] = ("Name", "DOB", "Gender", "Department", "Position", "Phone_Number", "Email", "Account", "Account_Number", "Social_Security_Number",
+                    "Joined", "Salary", "EmployeeID", "DepartmentID")
 
 tree2.column("#0", width=0, stretch=NO)
 tree2.column("Name", anchor=W, width=180)
@@ -270,7 +271,9 @@ def query_employee_table():
     items = c.fetchall()
     count = 0
     for employee in items:
-        tree2.insert(parent='', index='end', iid=count, text="", values=(employee[1], employee[2], employee[3], employee[4], employee[5], employee[6], employee[7], employee[8], employee[9], employee[10], employee[11], employee[12], employee[0], employee[14]))
+        tree2.insert(parent='', index='end', iid=count, text="", values=(employee[1], employee[2], employee[3], employee[4], employee[5], employee[6],
+                                                                         employee[7], employee[8], employee[9], employee[10], employee[11], employee[12],
+                                                                         employee[0], employee[14]))
         count += 1
     conn.commit()
     conn.close()
