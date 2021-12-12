@@ -331,7 +331,8 @@ def clear_employee_entries():
 def add_employee():
     conn = sqlite3.connect('company.db')
     c = conn.cursor()
-    c.execute("INSERT INTO employees VALUES (:Name, :DOB, :Gender, :Department, :Position, :Phone_Number, :Email, :Account, :Account_Number, :Social_Security_Number, :Joined, :Salary, :EmployeeID, :DepartmentID)",
+    c.execute("INSERT INTO employees VALUES (:Name, :DOB, :Gender, :Department, :Position, :Phone_Number, :Email, :Account, :Account_Number, "
+              ":Social_Security_Number, :Joined, :Salary, :EmployeeID, :DepartmentID)",
               {
                   'Name': tree_employee_Name.get(),
                   'DOB': tree_employee_DOB.get(),
@@ -675,7 +676,8 @@ def clear_record_entries():
 def add_record():
     conn = sqlite3.connect('company.db')
     c = conn.cursor()
-    c.execute("INSERT INTO records VALUES (:Name, :Record_Date_M, :Record_Date_D, :Record_Date_Y, :Time_In_Hour, :Time_In_Minute, :Time_Out_Hour, :Time_Out_Minute, :RecordID, :EmployeeID)",
+    c.execute("INSERT INTO records VALUES (:Name, :Record_Date_M, :Record_Date_D, :Record_Date_Y, :Time_In_Hour, :Time_In_Minute, :Time_Out_Hour, "
+              ":Time_Out_Minute, :RecordID, :EmployeeID)",
               {
                   'Name': tree_record_Name.get(),
                   'Record_Date_M': tree_record_Record_Date_M.get(),
