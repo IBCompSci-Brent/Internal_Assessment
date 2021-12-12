@@ -594,7 +594,8 @@ tree2.bind("<ButtonRelease-1>", select_employee)
 # Code for record
 tree3 = ttk.Treeview(record)
 tree3.pack(pady=10, padx=10)
-tree3['columns'] = ("Name", "Record_Date_M", "Record_Date_D", "Record_Date_Y", "Time_In_Hour", "Time_In_Minute", "Time_Out_Hour", "Time_Out_Minute", "RecordID", "EmployeeID")
+tree3['columns'] = ("Name", "Record_Date_M", "Record_Date_D", "Record_Date_Y", "Time_In_Hour", "Time_In_Minute", "Time_Out_Hour", "Time_Out_Minute", "RecordID",
+                    "EmployeeID")
 
 tree3.column("#0", width=0, stretch=NO)
 tree3.column("Name", anchor=W, width=180)
@@ -627,7 +628,8 @@ def query_record_table():
     items = c.fetchall()
     count = 0
     for record in items:
-        tree3.insert(parent='', index='end', iid=count, text="", values=(record[1], record[2], record[3], record[4], record[5], record[6], record[7], record[8], record[0], record[10]))
+        tree3.insert(parent='', index='end', iid=count, text="", values=(record[1], record[2], record[3], record[4], record[5], record[6], record[7], record[8],
+                                                                         record[0], record[10]))
         count += 1
     conn.commit()
     conn.close()
