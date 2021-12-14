@@ -375,7 +375,9 @@ def add_employee():
 def update_employee():
     selected = tree2.focus()
     tree2.item(selected, text="", values=(tree_employee_Name.get(), tree_employee_DOB.get(), tree_employee_Gender.get(), tree_employee_Department.get(),
-                                          tree_employee_Position.get(), tree_employee_Phone_Number.get(), tree_employee_Email.get(), tree_employee_Account.get(), tree_employee_Account_Number.get(), tree_employee_Social_Security_Number.get(), tree_employee_Joined.get(), tree_employee_Salary.get(), tree_employee_EmployeeID.get(), tree_employee_DepartmentID.get()))
+                                          tree_employee_Position.get(), tree_employee_Phone_Number.get(), tree_employee_Email.get(), tree_employee_Account.get(),
+                                          tree_employee_Account_Number.get(), tree_employee_Social_Security_Number.get(), tree_employee_Joined.get(),
+                                          tree_employee_Salary.get(), tree_employee_EmployeeID.get(), tree_employee_DepartmentID.get()))
 
     conn = sqlite3.connect('company.db')
 
