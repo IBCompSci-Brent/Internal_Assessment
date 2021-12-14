@@ -714,7 +714,10 @@ def add_record():
 
 def update_record():
     selected = tree3.focus()
-    tree3.item(selected, text="", values=(tree_record_Name.get(), tree_record_Record_Date_M.get(), tree_record_Record_Date_D.get(), tree_record_Record_Date_Y.get(), tree_record_Time_In_Hour.get(), tree_record_Time_In_Minute.get(), tree_record_Time_Out_Hour.get(), tree_record_Time_Out_Minute.get(), tree_record_RecordID.get(), tree_record_EmployeeID.get()))
+    tree3.item(selected, text="", values=(tree_record_Name.get(), tree_record_Record_Date_M.get(), tree_record_Record_Date_D.get(),
+                                          tree_record_Record_Date_Y.get(), tree_record_Time_In_Hour.get(), tree_record_Time_In_Minute.get(),
+                                          tree_record_Time_Out_Hour.get(), tree_record_Time_Out_Minute.get(), tree_record_RecordID.get(),
+                                          tree_record_EmployeeID.get()))
 
     conn = sqlite3.connect('company.db')
 
