@@ -38,7 +38,7 @@ def cancel_command():
     sys.exit()
 
 def enter_command():
-    if Username.get() == "Brent" and Passcode.get() == "1234":
+    if Username.get() == "Admin" and Passcode.get() == "1234":
         show_frame(home)
         Passcode.delete(0, END)
     else:
