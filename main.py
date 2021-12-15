@@ -21,16 +21,183 @@ container.grid_columnconfigure(0, weight=1)
 
 first = tk.Frame(container)
 home = tk.Frame(container)
+user = tk.Frame(container)
 department = tk.Frame(container)
 employee = tk.Frame(container)
 record = tk.Frame(container)
 salaries = tk.Frame(container)
 
-for F in (first, home, department, employee, record, salaries):
+for F in (first, home, user, department, employee, record, salaries):
     F.grid(row=0, column=0, sticky="nsew")
 
 def show_frame(frame_to_raise):
     frame_to_raise.tkraise()
+
+# Code for user
+tree4 = ttk.Treeview(user)
+tree4['columns'] = ("UserID", "Username", "Passcode")
+
+tree4.column("#0", width=0, stretch=NO)
+tree4.column("UserID", anchor=CENTER, width=120)
+tree4.column("Username", anchor=W, width=120)
+tree4.column("Passcode", anchor=W, width=120)
+
+tree4.heading("#0", text="", anchor=W)
+tree4.heading("UserID", text="User ID", anchor=CENTER)
+tree4.heading("Username", text="Username", anchor=W)
+tree4.heading("Passcode", text="Passcode", anchor=W)
+
+tree4.grid(row=0, column=0, pady=10, padx=260, ipadx=58)
+
+def query_user_table():
+    conn = sqlite3.connect('company.db')
+    c = conn.cursor()
+    c.execute("SELECT rowid, * FROM users")
+    items = c.fetchall()
+    count = 0
+    for user in items:
+        tree4.insert(parent='', index='end', iid=count, text="", values=(user[0], user[1], user[2]))
+        count += 1
+    conn.commit()
+    conn.close()
+
+def select_user(e):
+    tree_user_UserID.delete(0, END)
+    tree_user_Username.delete(0, END)
+    tree_user_Passcode.delete(0, END)
+
+    selected = tree4.focus()
+    values = tree4.item(selected, 'values')
+
+    tree_user_UserID.insert(0, values[0])
+    tree_user_Username.insert(0, values[1])
+    tree_user_Passcode.insert(0, values[2])
+
+def clear_user_entries():
+    tree_user_UserID.delete(0, END)
+    tree_user_Username.delete(0, END)
+    tree_user_Passcode.delete(0, END)
+
+def add_user():
+    conn = sqlite3.connect('company.db')
+    c = conn.cursor()
+    c.execute("INSERT INTO users VALUES (:Username, :Passcode, :UserID)",
+              {
+                  'Username': tree_user_Username.get(),
+                  'Passcode': tree_user_Passcode.get(),
+                  'UserID': tree_user_UserID.get(),
+              })
+
+    conn.commit()
+    conn.close()
+
+    tree_user_UserID.delete(0, END)
+    tree_user_Username.delete(0, END)
+    tree_user_Passcode.delete(0, END)
+
+    tree4.delete(*tree4.get_children())
+
+    query_user_table()
+
+def update_user():
+    selected = tree4.focus()
+    tree4.item(selected, text="", values=(tree_user_UserID.get(), tree_user_Username.get(), tree_user_Passcode.get()))
+
+    conn = sqlite3.connect('company.db')
+
+    c = conn.cursor()
+
+    c.execute("""UPDATE users SET
+        Username = :Username,
+        Passcode = :Passcode
+        WHERE oid = :oid""",
+        {
+            'Username': tree_user_Username.get(),
+            'Passcode': tree_user_Passcode.get(),
+            'oid': tree_user_UserID.get(),
+        })
+
+    conn.commit()
+    conn.close()
+
+    tree_user_UserID.delete(0, END)
+    tree_user_Username.delete(0, END)
+    tree_user_Passcode.delete(0, END)
+
+def delete_user():
+    a = tree4.selection()[0]
+    tree4.delete(a)
+
+    conn = sqlite3.connect('company.db')
+    c = conn.cursor()
+
+    c.execute("DELETE FROM users WHERE oid= :oid",
+              {
+                  'Username': tree_user_Username.get(),
+                  'Passcode': tree_user_Passcode.get(),
+                  'oid': tree_user_UserID.get(),
+              })
+
+    conn.commit()
+    conn.close()
+
+    tree_user_UserID.delete(0, END)
+    tree_user_Username.delete(0, END)
+    tree_user_Passcode.delete(0, END)
+
+def user_up():
+    lines = tree4.selection()
+    for line in lines:
+        tree4.move(line, tree4.parent(line), tree4.index(line) - 1)
+
+def user_down():
+    lines = tree4.selection()
+    for line in reversed(lines):
+        tree4.move(line, tree4.parent(line), tree4.index(line) + 1)
+
+tree_user_frame = Frame(user)
+tree_user_frame.grid(row=1, column=0)
+
+tree_user_UserID_label = tk.Label(tree_user_frame, text="User ID")
+tree_user_UserID_label.grid(row=2, column=0)
+
+tree_user_Username_label = tk.Label(tree_user_frame, text="Username")
+tree_user_Username_label.grid(row=2, column=1)
+
+tree_user_Passcode_label = tk.Label(tree_user_frame, text="Passcode")
+tree_user_Passcode_label.grid(row=2, column=2)
+
+tree_user_UserID = tk.Entry(tree_user_frame)
+tree_user_UserID.grid(row=3, column=0)
+
+tree_user_Username = tk.Entry(tree_user_frame)
+tree_user_Username.grid(row=3, column=1)
+
+tree_user_Passcode = tk.Entry(tree_user_frame)
+tree_user_Passcode.grid(row=3, column=2)
+
+clear_user_entries_btn = tk.Button(user, text="Clear Entries", command=clear_user_entries)
+clear_user_entries_btn.grid(row=4, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
+add_user_btn = tk.Button(user, text="Add User", command=add_user)
+add_user_btn.grid(row=5, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
+update_user_btn = tk.Button(user, text="Update User", command=update_user)
+update_user_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
+delete_user_btn = tk.Button(user, text="Delete User", command=delete_user)
+delete_user_btn.grid(row=7, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
+user_up_btn = tk.Button(user, text="↑", command=user_up)
+user_up_btn.grid(row=8, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
+user_down_btn = tk.Button(user, text="↓", command=user_down)
+user_down_btn.grid(row=9, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
+cancel_from_user_btn = tk.Button(user, text="Cancel", command=lambda: show_frame(home))
+cancel_from_user_btn.grid(row=10, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
+tree4.bind("<ButtonRelease-1>", select_user)
 
 # Code for first
 def cancel_command():
@@ -38,13 +205,20 @@ def cancel_command():
     sys.exit()
 
 def enter_command():
-    if Username.get() == "Admin" and Passcode.get() == "1234":
-        show_frame(home)
-        Passcode.delete(0, END)
-    else:
-        mb.showerror("Error", "Incorrect Username or Passcode")
-        Username.delete(0, END)
-        Passcode.delete(0, END)
+    conn = sqlite3.connect('company.db')
+    c = conn.cursor()
+    c.execute("SELECT rowid, * FROM users")
+    items = c.fetchall()
+    found = False
+    for user in items:
+        if Username.get() == user[1] and Passcode.get() == user[2]:
+            found = True
+            show_frame(home)
+            Passcode.delete(0, END)
+    if found == False:
+            mb.showerror("Error", "Incorrect Username or Passcode")
+            Username.delete(0, END)
+            Passcode.delete(0, END)
 
 Username = tk.Entry(first, width=30)
 Username.grid(row=0, column=1, pady=10)
@@ -63,20 +237,23 @@ cancel_from_first_btn = tk.Button(first, text="Cancel", command=lambda: cancel_c
 cancel_from_first_btn.grid(row=3, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 # Code for home
+user_btn = tk.Button(home, text="Users", command=lambda: show_frame(user))
+user_btn.grid(row=0, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
 department_btn = tk.Button(home, text="Departments", command=lambda: show_frame(department))
-department_btn.grid(row=0, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+department_btn.grid(row=1, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 employee_btn = tk.Button(home, text="Employees", command=lambda: show_frame(employee))
-employee_btn.grid(row=1, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+employee_btn.grid(row=2, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 record_btn = tk.Button(home, text="Records", command=lambda: show_frame(record))
-record_btn.grid(row=2, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+record_btn.grid(row=3, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 salaries_btn = tk.Button(home, text="Salaries", command=lambda: show_frame(salaries))
-salaries_btn.grid(row=3, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+salaries_btn.grid(row=4, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 cancel_from_home_btn = tk.Button(home, text="Cancel", command=lambda: show_frame(first))
-cancel_from_home_btn.grid(row=4, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+cancel_from_home_btn.grid(row=5, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 # Code for department
 tree = ttk.Treeview(department)
@@ -938,6 +1115,7 @@ wage = tk.Entry(salaries, width=30, textvariable=txt_wage)
 wage.grid(row=5, column=0, columnspan=3, pady=10, padx=10, ipadx=100)
 
 show_frame(first)
+query_user_table()
 query_department_table()
 query_employee_table()
 query_record_table()

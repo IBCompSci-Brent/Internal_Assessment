@@ -3,6 +3,11 @@ conn = sqlite3.connect('company.db')
 conn.execute("PRAGMA foreign_keys = 1")
 c = conn.cursor()
 
+c.execute("""CREATE TABLE IF NOT EXISTS users (
+        Username text,
+        Passcode text,
+        UserID INTEGER PRIMARY KEY
+    )""")
 c.execute("""CREATE TABLE IF NOT EXISTS departments (
         Name text,
         DepartmentID INTEGER PRIMARY KEY
@@ -37,6 +42,8 @@ c.execute("""CREATE TABLE IF NOT EXISTS records (
         EmployeeID integer,
         FOREIGN KEY (EmployeeID) REFERENCES employees (EmployeeID)
     )""")
+
+c.execute("INSERT INTO users VALUES ('Admin','1234',null)")
 
 c.execute("INSERT INTO departments VALUES ('Finance',null)")
 c.execute("INSERT INTO departments VALUES ('Human Resources',null)")
