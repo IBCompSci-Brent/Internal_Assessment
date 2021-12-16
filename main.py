@@ -1086,6 +1086,11 @@ def compute_salaries():
     conn.commit()
     conn.close()
 
+def clear_salaries_entries():
+    salaries_Name.delete(0, END)
+    salaries_Record_Date_M.delete(0, END)
+    salaries_Record_Date_Y.delete(0, END)
+
 salaries_Name = tk.Entry(salaries, width=30)
 salaries_Name.grid(row=0, column=1, pady=10)
 
@@ -1107,12 +1112,15 @@ salaries_Record_Date_Y_label.grid(row=2, column=0, pady=10, padx=10)
 compute_salaries_btn = tk.Button(salaries, text="Compute", command=compute_salaries)
 compute_salaries_btn.grid(row=3, column=0, columnspan=3, pady=10, padx=10, ipadx=100)
 
+clear_salaries_entries_btn = tk.Button(salaries, text="Clear Entries", command=clear_salaries_entries)
+clear_salaries_entries_btn.grid(row=4, column=0, columnspan=3, pady=10, padx=10, ipadx=105)
+
 cancel_from_salaries_btn = tk.Button(salaries, text="Cancel", command=lambda: show_frame(home))
-cancel_from_salaries_btn.grid(row=4, column=0, columnspan=3, pady=10, padx=10, ipadx=100)
+cancel_from_salaries_btn.grid(row=5, column=0, columnspan=3, pady=10, padx=10, ipadx=100)
 
 txt_wage = StringVar()
 wage = tk.Entry(salaries, width=30, textvariable=txt_wage)
-wage.grid(row=5, column=0, columnspan=3, pady=10, padx=10, ipadx=100)
+wage.grid(row=6, column=0, columnspan=3, pady=10, padx=10, ipadx=100)
 
 show_frame(first)
 query_user_table()
